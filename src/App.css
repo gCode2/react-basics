@@ -1,0 +1,146 @@
+*{
+    font-family:arial;
+    text-align:center;
+}
+.app{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+}
+.main{
+    text-align:center;
+}
+.typeSection{
+    
+}
+.typeButton{
+    margin: 10px;
+}
+.itemCard{
+    height: 100px;
+    width: 120px;
+    border: 1px solid #333333;
+    text-align:center;
+    border-radius:10px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items:center;
+}
+.itemName{
+    border-bottom: 1px solid black;
+}
+.itemType{
+    
+}
+.itemPower{
+    border-bottom: 1px solid black;
+}
+.equipment, .itemPrice{
+    padding-top:10px;
+}
+.itemsRow{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    justify-content: center;
+}
+.spellBook{
+    display: flex;
+    flex-direction: row;
+    gap:10px;
+    justify-content: center;
+}
+.spellCreationTable{
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+    justify-content: center;
+    width: 250px;
+    border:1px solid black;
+    border-radius: 10px;
+    padding:10px; 
+}
+.spellCard{
+    height: 150px;
+    width: 200px;
+    border: 1px solid #333333;
+    text-align:center;
+    border-radius:10px;
+    display:flex;
+    flex-direction: column;
+    align-items:center;
+    justify-content: space-evenly;
+}
+.difficultyChips, .categoryChips{
+    display:flex;
+    flex-direction:row;
+    width: 400px;
+    gap: 10px;
+    margin:10px;
+    justify-content: center;
+}
+.chip{
+    border: 1px solid black;
+    border-radius:10px;
+    padding: 5px;
+    min-width: 75px;
+    text-align:center;
+    height: 1rem;
+}
+.chip:hover{
+    background: #eeeeee;
+    cursor:pointer;
+    transition: 0.5s;
+}
+.questCard{
+    border: 1px solid black;
+    height: 150px;
+    width: 200px;
+    border-radius: 10px;
+    display:flex;
+    flex-direction:column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+.questDashboard{
+    display:flex;
+    flex-direction: row;
+    gap:5px;
+}
+.questTitle{
+    font-size: 20px;
+}
+.questDifficulty{
+    font-size: 10px;
+}
+.questReward{
+
+}
+.questOperation{
+    display:flex;
+    flex-direction: row;
+    gap: 10px;
+}
+.remove:hover{
+    background: #ffb3b3;
+}
+.complete:hover{
+    background: #b8ff9c;
+}
+.questMakingBox{
+    display:flex;
+    flex-direction: column;
+    width: 300px;
+    align-items: center;
+}
+.sortingBox{
+    width: 200px;
+    margin: 10px 0px;
+    display:flex;
+    flex-direction: column;
+    gap: 5px;
+    border:1px solid #000;
+    padding: 5px;
+    border-radius:10px;
+}
