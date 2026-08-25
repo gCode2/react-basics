@@ -21,9 +21,23 @@ function App() {
     { id: 3, name: "Troll", hp: 100, reward: 80 }
   ]);
   const [monstersDefeated, setMonstersDefeated] = useState([]);
-  const [goldEarned, setGoldEarned] = useState(0);
 
+  function handleAttackMonster(monsterToAttack){
+    const updatedMonsters = monsters.map(monster=>{
+      if(monster.id === monsterToAttack.id){
+        let monsterToUpdate = {...monster, hp: (monsterToAttack.hp - player.attack) > 0 ? monsterToAttack.hp - player.attack : 0}
 
+        if(monsterToUpdate.hp <= 0) {
+          monstersDefeated.push(monsterToUpdate);
+        }
+
+        return monsterToUpdate;
+      }else{
+        return monster;
+      }
+    })
+    setMonsters(updatedMonsters);
+  }
   return(
     // <FirstReminder/>
     // <SecondReminder/>
@@ -38,10 +52,10 @@ function App() {
         <PlayerStats playerStats={player}/>
       </div>
       <div className="monsterArenaHolder">
-        <MonsterArena monstersList={monsters}/>
+        <MonsterArena monstersList={monsters} attackMonsterHandler={handleAttackMonster}/>
       </div>
       <div className="gameSummaryHolder">
-        <GameSummary goldEarned={goldEarned} monstersDefeated={monstersDefeated.length}/>
+        <GameSummary monstersDefeated={monstersDefeated}/>
       </div>
 
     </div>

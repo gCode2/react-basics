@@ -1,4 +1,4 @@
-function MonsterCard({monster}){
+function MonsterCard({monster, attackMonsterHandler}){
     return(
         <>
             <div className="monsterCard">
@@ -12,9 +12,16 @@ function MonsterCard({monster}){
                     Reward: {monster.reward}
                 </div>
                 <div>
-                    <button>
-                        Kill
-                    </button>
+                    {monster.hp > 0 ? <>
+                        <button onClick={()=>{attackMonsterHandler(monster)}}>
+                            Attack
+                        </button>
+                    </> : <>
+                    <div>
+                        DEFEATED!
+                    </div>
+                    </>}
+                    
                 </div>
             </div>
         </>
