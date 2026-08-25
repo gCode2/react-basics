@@ -12,7 +12,7 @@ function App() {
   const [player,setPlayer] = useState({
     name: "Gregor",
     hp: 10,
-    maxHP: 100,
+    maxHP: 120,
     attack: 20,
     gold: 100
   })

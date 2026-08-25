@@ -15,6 +15,7 @@ function PlayerStats({playerStats, playerHealHandler}){
                     Heal ( -20 gold )
                 </button>
             </div>
+            {/* i was wondering if i should display the heal button if the player has less than 20 gold  - easy to implement but i'll leave it that way, at least for now*/}
             </> : <></>}
             
         </div>

@@ -11,9 +11,6 @@
 .main{
     text-align:center;
 }
-.typeSection{
-    
-}
 .typeButton{
     margin: 10px;
 }
@@ -30,9 +27,6 @@
 }
 .itemName{
     border-bottom: 1px solid black;
-}
-.itemType{
-    
 }
 .itemPower{
     border-bottom: 1px solid black;
@@ -114,9 +108,6 @@
 }
 .questDifficulty{
     font-size: 10px;
-}
-.questReward{
-
 }
 .questOperation{
     display:flex;
