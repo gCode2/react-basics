@@ -22,33 +22,57 @@ function App() {
     { id: 3, name: "Troll", hp: 100, reward: 80 }
   ]);
 
-  const [monsterTypes, setMonsterTypes] = useState([
+  const monsterTypes = [
     { name: "Goblin", hp: 30, reward: 20 },
     { name: "Black Goblin", hp: 40, reward: 25 },
     { name: "Wolf", hp: 50, reward: 35 },
     { name: "Troll", hp: 100, reward: 80 },
     { name: "Ghost", hp: 150, reward: 100},
     { name: "Orc", hp: 250, reward: 150}
-  ])
+  ];
 
   const [monstersDefeated, setMonstersDefeated] = useState([]);
 
   function handleAttackMonster(monsterToAttack){
+    let defeated = false;
+    
     const updatedMonsters = monsters.map(monster=>{
-      if(monster.id === monsterToAttack.id){
-        let monsterToUpdate = {...monster, hp: (monsterToAttack.hp - player.attack) > 0 ? monsterToAttack.hp - player.attack : 0}
-
-        if(monsterToUpdate.hp <= 0) {
-          monstersDefeated.push(monsterToUpdate);
-          setPlayer({...player, gold: player.gold + monsterToUpdate.reward})
-        }
-
-        return monsterToUpdate;
-      }else{
+      if(monster.id !== monsterToAttack.id){
         return monster;
       }
+
+      const updatedMonster = {...monster, hp: monster.hp - player.attack};
+
+      if(updatedMonster.hp <= 0){
+        defeated = true;
+      }
+
+      return updatedMonster;
     })
+
     setMonsters(updatedMonsters);
+    if(defeated){
+      setMonstersDefeated(prev=>[...prev, monsterToAttack]);
+      setPlayer(prev=>({
+        ...prev, gold: prev.gold + monsterToAttack.reward
+      }));
+      
+    }
+    // const updatedMonsters = monsters.map(monster=>{
+    //   if(monster.id === monsterToAttack.id){
+    //     let monsterToUpdate = {...monster, hp: (monsterToAttack.hp - player.attack) > 0 ? monsterToAttack.hp - player.attack : 0}
+
+    //     if(monsterToUpdate.hp <= 0) {
+    //       setMonstersDefeated([...monstersDefeated, monsterToUpdate]);
+    //       setPlayer({...player, gold: player.gold + monsterToUpdate.reward})
+    //     }
+
+    //     return monsterToUpdate;
+    //   }else{
+    //     return monster;
+    //   }
+    // })
+    // setMonsters(updatedMonsters);
   }
   function handlePlayerHeal(){
     if(player.gold < 20){
