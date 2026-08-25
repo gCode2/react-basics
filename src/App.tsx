@@ -21,6 +21,16 @@ function App() {
     { id: 2, name: "Wolf", hp: 50, reward: 35 },
     { id: 3, name: "Troll", hp: 100, reward: 80 }
   ]);
+
+  const [monsterTypes, setMonsterTypes] = useState([
+    { name: "Goblin", hp: 30, reward: 20 },
+    { name: "Black Goblin", hp: 40, reward: 25 },
+    { name: "Wolf", hp: 50, reward: 35 },
+    { name: "Troll", hp: 100, reward: 80 },
+    { name: "Ghost", hp: 150, reward: 100},
+    { name: "Orc", hp: 250, reward: 150}
+  ])
+
   const [monstersDefeated, setMonstersDefeated] = useState([]);
 
   function handleAttackMonster(monsterToAttack){
@@ -48,6 +58,10 @@ function App() {
     }
     setPlayer({...player, hp: (player.hp + 20) > player.maxHP ? player.maxHP : (player.hp + 20), gold: player.gold-20})
   }
+  function handleMonsterSummon(){
+    let x = Math.floor(Math.random()*monsterTypes.length);
+    setMonsters([...monsters, {...monsterTypes[x], id: Math.floor(Math.random()*10000+1)}]);
+  }
   function calculateTotalPossibleRewards(){
     return monsters.reduce((acc, item)=>{
       if(item.hp > 0){
@@ -74,6 +88,11 @@ function App() {
       </div>
       <div className="gameSummaryHolder">
         <GameSummary monstersDefeated={monstersDefeated} calculateRewards={calculateTotalPossibleRewards}/>
+      </div>
+      <div className="monsterSummonButton">
+        <button onClick={handleMonsterSummon}>
+          Summon random monster!
+        </button>
       </div>
     </div>
     </>
