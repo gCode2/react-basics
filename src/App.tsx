@@ -11,7 +11,8 @@ import GameSummary from './components/FifthReminder/GameSummary/GameSummary';
 function App() {
   const [player,setPlayer] = useState({
     name: "Gregor",
-    hp: 100,
+    hp: 10,
+    maxHP: 100,
     attack: 20,
     gold: 100
   })
@@ -29,6 +30,7 @@ function App() {
 
         if(monsterToUpdate.hp <= 0) {
           monstersDefeated.push(monsterToUpdate);
+          setPlayer({...player, gold: player.gold + monsterToUpdate.reward})
         }
 
         return monsterToUpdate;
@@ -37,6 +39,15 @@ function App() {
       }
     })
     setMonsters(updatedMonsters);
+  }
+  function handlePlayerHeal(){
+    if(player.gold < 20){
+      // alert("not enough gold");
+      console.log("not enough gold");
+      return
+    }
+    setPlayer({...player, hp: (player.hp + 20) > player.maxHP ? player.maxHP : (player.hp + 20), gold: player.gold-20})
+
   }
   return(
     // <FirstReminder/>
@@ -49,7 +60,7 @@ function App() {
         <h1>Monster Hunter Arena</h1>
       </div>
       <div className="playerStatsHolder">
-        <PlayerStats playerStats={player}/>
+        <PlayerStats playerStats={player} playerHealHandler={handlePlayerHeal}/>
       </div>
       <div className="monsterArenaHolder">
         <MonsterArena monstersList={monsters} attackMonsterHandler={handleAttackMonster}/>
