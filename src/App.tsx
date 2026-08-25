@@ -47,7 +47,14 @@ function App() {
       return
     }
     setPlayer({...player, hp: (player.hp + 20) > player.maxHP ? player.maxHP : (player.hp + 20), gold: player.gold-20})
-
+  }
+  function calculateTotalPossibleRewards(){
+    return monsters.reduce((acc, item)=>{
+      if(item.hp > 0){
+        return acc + item.reward
+      }
+      return acc;
+    }, 0)
   }
   return(
     // <FirstReminder/>
@@ -66,9 +73,8 @@ function App() {
         <MonsterArena monstersList={monsters} attackMonsterHandler={handleAttackMonster}/>
       </div>
       <div className="gameSummaryHolder">
-        <GameSummary monstersDefeated={monstersDefeated}/>
+        <GameSummary monstersDefeated={monstersDefeated} calculateRewards={calculateTotalPossibleRewards}/>
       </div>
-
     </div>
     </>
   )

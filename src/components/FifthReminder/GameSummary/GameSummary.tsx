@@ -1,4 +1,4 @@
-function GameSummary({monstersDefeated}){
+function GameSummary({monstersDefeated, calculateRewards}){
 
     function calculateMoneyEarned(){
         let moneyEarned = 0;
@@ -13,6 +13,7 @@ function GameSummary({monstersDefeated}){
             <div className="gameSummary">
                 <div>Monsters Killed: {monstersDefeated.length}</div>
                 <div>Gold Earned: {calculateMoneyEarned()}</div>
+                <div>Total possible reward: {calculateRewards()}</div>
             </div>
         </>
     )
