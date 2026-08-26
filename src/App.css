@@ -136,3 +136,21 @@
     padding: 5px;
     border-radius:10px;
 }
+.noteCard{
+    border: 1px solid black;
+    border-radius:10px;
+    padding: 10px;
+    width: 300px;
+    box-sizing:border-box;
+    display:flex;
+    flex-direction:column;
+    align-items: center;
+    justify-content: space-around;
+}
+.notesListHolder{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: space-evenly;
+}

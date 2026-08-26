@@ -7,6 +7,7 @@ import { useState } from 'react'
 import './App.css'
 import NotesList from './components/MagesJournal/NotesList/NotesList'
 import JournalSummary from './components/MagesJournal/JournalSummary/JournalSummary'
+import AddNoteForm from './components/MagesJournal/AddNoteForm/AddNoteForm'
 
 
 function App() {
@@ -28,11 +29,6 @@ function App() {
   }
 ])
   return(
-    // <FirstReminder/>
-    // <SecondReminder/>
-    // <ThirdReminder/>
-    // <FourthReminder/>
-    // <FifthReminder/>
     <>
       <div className="app">
         <div className="">
@@ -41,16 +37,21 @@ function App() {
           </h1>
         </div>
         <div>
-           <NotesList/>
+           <NotesList notes={notes}/>
         </div>
         <div>
-          
+          <AddNoteForm/>
         </div>
          <div>
             <JournalSummary/>
          </div>
       </div>
     </>
+    // <FirstReminder/>
+    // <SecondReminder/>
+    // <ThirdReminder/>
+    // <FourthReminder/>
+    // <FifthReminder/>
   )
 }
 
