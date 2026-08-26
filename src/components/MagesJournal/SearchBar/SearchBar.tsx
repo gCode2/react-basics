@@ -4,7 +4,7 @@ function SearchBar({searchNoteHandler}){
     const [searchText, setSearchText] = useState("")
     function handleNotesSearch(e){
         setSearchText(e.target.value);
-        searchNoteHandler(searchText);
+        searchNoteHandler(e.target.value);
     }
     return (
         <>

@@ -38,7 +38,7 @@ function App() {
 
 
   function searchNotes(str){
-    console.log(str);
+    // console.log(str);
     if(str === ""){
       setSearchActive(false)
     }
