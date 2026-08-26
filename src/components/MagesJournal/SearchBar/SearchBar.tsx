@@ -1,6 +1,14 @@
-function SearchBar(){
+import { useState } from "react"
+
+function SearchBar({searchNoteHandler}){
+    const [searchText, setSearchText] = useState("")
+    function handleNotesSearch(e){
+        setSearchText(e.target.value);
+        searchNoteHandler(searchText);
+    }
     return (
         <>
+            <input type="text" className="searchBar" value={searchText} onChange={(e)=>handleNotesSearch(e)}/>
         </>
     )
 }

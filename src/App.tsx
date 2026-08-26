@@ -8,6 +8,7 @@ import './App.css'
 import NotesList from './components/MagesJournal/NotesList/NotesList'
 import JournalSummary from './components/MagesJournal/JournalSummary/JournalSummary'
 import AddNoteForm from './components/MagesJournal/AddNoteForm/AddNoteForm'
+import SearchBar from './components/MagesJournal/SearchBar/SearchBar'
 
 function App() {
   const [notes, setNotes] = useState([{
@@ -27,10 +28,27 @@ function App() {
     content: "Its a shame I let those goblins steal my journal. When I was creating it I didnt think anyone could outsmart me and steal it from me... Since its a magic journal, nothing can be erased from it. Previous note... it hurts... I bet it hurts like my fireballs hurt the goblins"
   }
 ])
+  const [filteredNotes, setFilteredNotes] = useState([]);
+  const [isSearchActive, setSearchActive] = useState(false);
+
+
   function addNoteHandler(noteToAdd){
     setNotes([...notes, {id: Math.floor(Math.random()*1000+1), content: noteToAdd}]);
   }
 
+
+  function searchNotes(str){
+    console.log(str);
+    if(str === ""){
+      setSearchActive(false)
+    }
+    else{
+      setSearchActive(true)
+      setFilteredNotes(notes.filter(note=>note.content.includes(str)))
+    }
+    
+    // return notes.filter(note=>note.content.includes(str));
+  }
   return(
     <>
       <div className="app">
@@ -40,7 +58,10 @@ function App() {
           </h1>
         </div>
         <div>
-           <NotesList notes={notes}/>
+          <SearchBar searchNoteHandler={searchNotes}/>
+        </div>
+        <div>
+           <NotesList notes={isSearchActive ? filteredNotes : notes}/>
         </div>
         <div>
           <AddNoteForm addNote={addNoteHandler}/>

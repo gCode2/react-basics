@@ -154,3 +154,10 @@
     gap: 10px;
     justify-content: space-evenly;
 }
+.searchBar{
+    position:relative;
+    height:20px;
+    width: 400px;
+    border-radius: 5px;
+    border: 1px solid #333;
+}
