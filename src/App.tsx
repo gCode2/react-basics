@@ -12,16 +12,6 @@ import SearchBar from './components/MagesJournal/SearchBar/SearchBar'
 
 function App() {
 
-
-  useEffect(()=>{
-    if(localStorage.getItem("notes")){
-      // localStorage.removeItem("notes");
-    }else{
-      // console.log("sXD");
-      localStorage.setItem("notes", JSON.stringify(notes));
-    }
-  },[])
-
   const [notes, setNotes] = useState(localStorage.getItem("notes") ? JSON.parse(localStorage.getItem("notes")) : [{
     id: 0,
     content: "Its my first note in this journal. Shall I be damned if I ever forget this I've made the decision to start this jouornal"
@@ -39,15 +29,18 @@ function App() {
     content: "Its a shame I let those goblins steal my journal. When I was creating it I didnt think anyone could outsmart me and steal it from me... Since its a magic journal, nothing can be erased from it. Previous note... it hurts... I bet it hurts like my fireballs hurt the goblins"
   }
 ])
-  // const [filteredNotes, setFilteredNotes] = useState([]);
-  // const [isSearchActive, setSearchActive] = useState(false);
-    const [searchText, setSearchText] = useState("");
+
+  const [searchText, setSearchText] = useState("");
+
+  
+  useEffect(()=>{
+      localStorage.setItem("notes", JSON.stringify(notes));
+  },[notes])
 
 
   function addNoteHandler(noteToAdd){
-    let note = {id: Math.floor(Math.random()*1000+1), content: noteToAdd};
-    setNotes([...notes, note]);
-    localStorage.setItem("notes", JSON.stringify([...notes, note]));
+    setNotes([...notes, {id: Math.floor(Math.random()*1000+1), content: noteToAdd}]);
+
   }
 
 
