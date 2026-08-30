@@ -28,8 +28,9 @@ function App() {
     content: "Its a shame I let those goblins steal my journal. When I was creating it I didnt think anyone could outsmart me and steal it from me... Since its a magic journal, nothing can be erased from it. Previous note... it hurts... I bet it hurts like my fireballs hurt the goblins"
   }
 ])
-  const [filteredNotes, setFilteredNotes] = useState([]);
-  const [isSearchActive, setSearchActive] = useState(false);
+  // const [filteredNotes, setFilteredNotes] = useState([]);
+  // const [isSearchActive, setSearchActive] = useState(false);
+    const [searchText, setSearchText] = useState("");
 
 
   function addNoteHandler(noteToAdd){
@@ -38,16 +39,7 @@ function App() {
 
 
   function searchNotes(str){
-    // console.log(str);
-    if(str === ""){
-      setSearchActive(false)
-    }
-    else{
-      setSearchActive(true)
-      setFilteredNotes(notes.filter(note=>note.content.includes(str)))
-    }
-    
-    // return notes.filter(note=>note.content.includes(str));
+    setSearchText(str);
   }
   return(
     <>
@@ -58,10 +50,10 @@ function App() {
           </h1>
         </div>
         <div>
-          <SearchBar searchNoteHandler={searchNotes}/>
+          <SearchBar searchNoteHandler={searchNotes} searchText={searchText}/>
         </div>
         <div>
-           <NotesList notes={isSearchActive ? filteredNotes : notes}/>
+           <NotesList notes={searchText === "" ? notes : notes.filter(note=>note.content.includes(searchText))}/>
         </div>
         <div>
           <AddNoteForm addNote={addNoteHandler}/>
