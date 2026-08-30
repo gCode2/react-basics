@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 // import FirstReminder from './components/FirstReminder.tsx';
 // import SecondReminder from './components/SecondReminder.tsx';
 // import ThirdReminder from './components/ThirdReminder.tsx';
@@ -8,7 +8,7 @@ import MonsterArena from './FifthReminder/MonsterArena/MonsterArena';
 import GameSummary from './FifthReminder/GameSummary/GameSummary';
 
 function FifthReminder() {
-  const [player,setPlayer] = useState({
+  const [player, setPlayer] = useState({
     name: "Gregor",
     hp: 10,
     maxHP: 120,
@@ -21,6 +21,19 @@ function FifthReminder() {
     { id: 3, name: "Troll", hp: 100, reward: 80 }
   ]);
 
+  useEffect(()=>{
+    const intervalId = setInterval(()=>regenHealth(),1000);
+    return ()=>{
+      clearInterval(intervalId);
+    }
+  }, [])
+  function regenHealth(){
+      setPlayer(prev=>({...prev, hp: (prev.hp+2 >= prev.maxHP) ? prev.maxHP : prev.hp +2}))
+  }
+  function damagePlayer(dmg){
+      setPlayer(prev=>({...prev, hp: prev.hp-dmg}))
+  }
+  
   const monsterTypes = [
     { name: "Goblin", hp: 30, reward: 20 },
     { name: "Black Goblin", hp: 40, reward: 25 },
@@ -34,7 +47,7 @@ function FifthReminder() {
 
   function handleAttackMonster(monsterToAttack){
     let defeated = false;
-    
+    damagePlayer(Math.floor(Math.random()*10+1))
     const updatedMonsters = monsters.map(monster=>{
       if(monster.id !== monsterToAttack.id){
         return monster;
@@ -79,11 +92,11 @@ function FifthReminder() {
       console.log("not enough gold");
       return
     }
-    setPlayer({...player, hp: (player.hp + 20) > player.maxHP ? player.maxHP : (player.hp + 20), gold: player.gold-20})
+    setPlayer(prev=>({...prev, hp: (prev.hp + 20) > prev.maxHP ? prev.maxHP : (prev.hp + 20), gold: prev.gold-20}))
   }
   function handleMonsterSummon(){
     let x = Math.floor(Math.random()*monsterTypes.length);
-    setMonsters([...monsters, {...monsterTypes[x], id: Math.floor(Math.random()*10000+1)}]);
+    setMonsters(prev=>([...prev, {...monsterTypes[x], id: Math.floor(Math.random()*10000+1)}]));
   }
   function calculateTotalPossibleRewards(){
     return monsters.reduce((acc, item)=>{
