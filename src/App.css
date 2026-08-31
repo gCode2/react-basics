@@ -136,7 +136,7 @@
     padding: 5px;
     border-radius:10px;
 }
-.noteCard{
+.noteCard, .mageCard{
     border: 1px solid black;
     border-radius:10px;
     padding: 10px;
@@ -147,13 +147,14 @@
     align-items: center;
     justify-content: space-around;
 }
-.notesListHolder{
+.notesListHolder, .magesListHolder{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
     gap: 10px;
     justify-content: space-evenly;
 }
+
 .searchBar{
     position:relative;
     height:20px;
