@@ -52,12 +52,20 @@ function App() {
 
   ];
   const [mages, setMages] = useState(localStorage.getItem("mages") ? JSON.parse(localStorage.getItem("mages")) : magesArray);
+
   const [selectedSpecialization, setSelectedSpecialization] = useState("all");
+
+  const [searchText, setSearchText] = useState("");
+
   useEffect(()=>{
     
     localStorage.setItem("mages", JSON.stringify(mages));
 
   }, [mages])
+
+  function handleSearchTextChange(text){
+    setSearchText(text)
+  }
 
   function handleMageDismiss(id){
     setMages(mages.filter(mage=>mage.id !== id))
@@ -77,14 +85,14 @@ function App() {
     </div>
     <div>
       <div>
-        <SearchBar/>
+        <SearchBar searchTextChangeHandler={handleSearchTextChange} searchText={searchText}/>
       </div>
       <div>
         <SpecializationFilter specializations={specializations} changeCategoryHandler={handleSpecializationChange}/>
       </div>
     </div>
     <div>
-      <MagesList mages={mages} mageDismissHandler={handleMageDismiss} selectedSpecialization={selectedSpecialization}/>
+      <MagesList mages={searchText==="" ? mages : mages.filter(mage=>mage.name.includes(searchText))} mageDismissHandler={handleMageDismiss} selectedSpecialization={selectedSpecialization}/>
     </div>
     </>
     // <FirstReminder/>
