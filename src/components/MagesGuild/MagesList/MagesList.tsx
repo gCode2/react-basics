@@ -1,10 +1,10 @@
 import MageCard from "./MageCard/MageCard"
 
-function MagesList({mages, mageDismissHandler}){
+function MagesList({mages, mageDismissHandler, selectedSpecialization}){
     return (
         <>
         <div className="magesListHolder">
-        {mages.map(mage=>(
+        {mages.filter(mage=>mage.specialization === selectedSpecialization || selectedSpecialization === "all").map(mage=>(
             <MageCard key={mage.id} mage={mage} mageDismissHandler={mageDismissHandler}/>
         ))}
         </div>

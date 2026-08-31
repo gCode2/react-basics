@@ -7,6 +7,8 @@ import { useEffect, useState } from 'react'
 // import MagesJournal from './components/MagesJournal'
 import './App.css'
 import MagesList from './components/MagesGuild/MagesList/MagesList'
+import SearchBar from './components/MagesGuild/MageControls/SearchBar/SearchBar';
+import SpecializationFilter from './components/MagesGuild/MageControls/SpecializationFilter/SpecializationFilter';
 
 
 function App() {
@@ -49,8 +51,8 @@ function App() {
     },
 
   ];
-  const [mages, setMages] = useState(localStorage.getItem("mages") ? JSON.parse(localStorage.getItem("mages")) : magesArray)
-
+  const [mages, setMages] = useState(localStorage.getItem("mages") ? JSON.parse(localStorage.getItem("mages")) : magesArray);
+  const [selectedSpecialization, setSelectedSpecialization] = useState("all");
   useEffect(()=>{
     
     localStorage.setItem("mages", JSON.stringify(mages));
@@ -61,13 +63,28 @@ function App() {
     setMages(mages.filter(mage=>mage.id !== id))
   }
 
+  let specializations = getSpecializations();
+  function getSpecializations(){
+    return new Array("all", ...new Set(mages.map(mage=>mage.specialization)))
+  }
+  function handleSpecializationChange(spec){
+    setSelectedSpecialization(spec);
+  }
   return(
     <>
     <div className="app">
       <h1>Welcome to the Mages Guild!</h1>
     </div>
     <div>
-      <MagesList mages={mages} mageDismissHandler={handleMageDismiss}/>
+      <div>
+        <SearchBar/>
+      </div>
+      <div>
+        <SpecializationFilter specializations={specializations} changeCategoryHandler={handleSpecializationChange}/>
+      </div>
+    </div>
+    <div>
+      <MagesList mages={mages} mageDismissHandler={handleMageDismiss} selectedSpecialization={selectedSpecialization}/>
     </div>
     </>
     // <FirstReminder/>

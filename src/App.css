@@ -67,7 +67,7 @@
     align-items:center;
     justify-content: space-evenly;
 }
-.difficultyChips, .categoryChips{
+.difficultyChips, .categoryChips, .specializationChips{
     display:flex;
     flex-direction:row;
     width: 400px;
