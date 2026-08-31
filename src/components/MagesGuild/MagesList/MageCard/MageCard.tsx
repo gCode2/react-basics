@@ -1,9 +1,9 @@
-function MageCard({mage}){
+function MageCard({mage, mageDismissHandler}){
     return (
         <>
         <div className="mageCard">
             <div>
-                Name: {mage.name}
+                {mage.name}
             </div>
             <div>
                 {mage.specialization} Mage
@@ -12,7 +12,7 @@ function MageCard({mage}){
                 Level: {mage.level}
             </div>
             <div>
-                <button>
+                <button onClick={()=>{mageDismissHandler(mage.id)}}>
                     Dismiss
                 </button>
             </div>

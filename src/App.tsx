@@ -51,13 +51,23 @@ function App() {
   ];
   const [mages, setMages] = useState(localStorage.getItem("mages") ? JSON.parse(localStorage.getItem("mages")) : magesArray)
 
+  useEffect(()=>{
+    
+    localStorage.setItem("mages", JSON.stringify(mages));
+
+  }, [mages])
+
+  function handleMageDismiss(id){
+    setMages(mages.filter(mage=>mage.id !== id))
+  }
+
   return(
     <>
     <div className="app">
       <h1>Welcome to the Mages Guild!</h1>
     </div>
     <div>
-      <MagesList mages={mages}/>
+      <MagesList mages={mages} mageDismissHandler={handleMageDismiss}/>
     </div>
     </>
     // <FirstReminder/>
