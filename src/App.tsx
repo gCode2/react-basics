@@ -70,7 +70,7 @@ function App() {
   }
 
   function handleMageDismiss(id){
-    setMages(mages.filter(mage=>mage.id !== id))
+    setMages(prev=>(prev.filter(mage=>mage.id !== id)))
   }
 
   let specializations = getSpecializations();
@@ -93,7 +93,7 @@ function App() {
       <div>
         <SearchBar searchTextChangeHandler={handleSearchTextChange} searchText={searchText}/>
       </div>
-      <div>
+      <div style={{display: "flex", flexDirection:"row", justifyContent:"center"}}>
         <SpecializationFilter specializations={specializations} changeCategoryHandler={handleSpecializationChange}/>
       </div>
     </div>

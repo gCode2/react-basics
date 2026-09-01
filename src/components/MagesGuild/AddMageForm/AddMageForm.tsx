@@ -42,7 +42,7 @@ function AddMageForm({addMageHandler}){
 
     return (
         <>
-        <div>
+        <div style={{display: "flex", flexDirection:"row", justifyContent:"center"}}>
             <form onSubmit={handleFormSubmit} className="addMageForm">
                 <h2>Add Mage Form</h2>
                 <div>
