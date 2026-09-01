@@ -8,25 +8,27 @@ function AddMageForm({addMageHandler}){
         setFormData(prev=>({...prev, [e.target.name]: e.target.value}))
     }
 
-    function validateInputs(){
-        const newErrors = {};
-        if(!formData.name){
-            newErrors.name = "Mage name is required"
-        }
-        if(!formData.specialization){
-            newErrors.specialization = "Mage specialization is required"
-        }
-        if(!formData.level){
-            newErrors.level = "Mage level is required"
-        }
-        if(!Number(formData.level) || !parseInt(formData.level)){
-            newErrors.level = "Mage level must be a number"
-        }
-        if(formData.level <= 0){
-            newErrors.level = "Mage level must be greater than 0"
-        }
-        return newErrors;
+    function validateInputs() {
+    const newErrors = {};
+
+    if (!formData.name.trim()) {
+        newErrors.name = "Mage name is required";
     }
+
+    if (!formData.specialization.trim()) {
+        newErrors.specialization = "Mage specialization is required";
+    }
+
+    if (!formData.level.trim()) {
+        newErrors.level = "Mage level is required";
+    } else if (!/^\d+$/.test(formData.level)) {
+        newErrors.level = "Mage level must be a whole number";
+    } else if (Number(formData.level) <= 0) {
+        newErrors.level = "Mage level must be greater than 0";
+    }
+
+    return newErrors;
+}
 
     function handleFormSubmit(e){
         e.preventDefault();
