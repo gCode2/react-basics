@@ -9,6 +9,8 @@ import './App.css'
 import MagesList from './components/MagesGuild/MagesList/MagesList'
 import SearchBar from './components/MagesGuild/MageControls/SearchBar/SearchBar';
 import SpecializationFilter from './components/MagesGuild/MageControls/SpecializationFilter/SpecializationFilter';
+import GuildSummary from './components/MagesGuild/GuildSummary/GuildSummary';
+import AddMageForm from './components/MagesGuild/AddMageForm/AddMageForm';
 
 
 function App() {
@@ -78,6 +80,9 @@ function App() {
   function handleSpecializationChange(spec){
     setSelectedSpecialization(spec);
   }
+  function addMage(data){
+    console.log(data)
+  }
   return(
     <>
     <div className="app">
@@ -93,6 +98,12 @@ function App() {
     </div>
     <div>
       <MagesList mages={searchText==="" ? mages : mages.filter(mage=>mage.name.includes(searchText))} mageDismissHandler={handleMageDismiss} selectedSpecialization={selectedSpecialization}/>
+    </div>
+    <div>
+      <GuildSummary mages={mages}/>
+    </div>
+    <div>
+      <AddMageForm addMageHandler={addMage}/>
     </div>
     </>
     // <FirstReminder/>
