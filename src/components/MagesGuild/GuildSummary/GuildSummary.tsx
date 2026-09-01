@@ -11,7 +11,7 @@ function GuildSummary({mages}){
                 Mages in Guild Count: {mages.length}
             </div>
             <div>
-                Average Mage level in guild: {(getAllMagesLevelSum()/mages.length).toFixed(2)}
+                Average Mage level in guild: {mages.length > 0 ? (getAllMagesLevelSum()/mages.length).toFixed(2) : 0}
             </div>
         </div>
         </>
