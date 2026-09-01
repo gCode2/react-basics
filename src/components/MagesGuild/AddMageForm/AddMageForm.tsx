@@ -19,6 +19,9 @@ function AddMageForm({addMageHandler}){
         if(!formData.level){
             newErrors.level = "Mage level is required"
         }
+        if(!Number(formData.level)){
+            newErrors.level = "Mage level must be a number"
+        }
         return newErrors;
     }
 
@@ -29,8 +32,12 @@ function AddMageForm({addMageHandler}){
         if(Object.keys(validationErrors).length > 0 ){
             setErrors(validationErrors);
         }else{
-            addMageHandler(formData);
+            setErrors({});
+            setFormData({name:"", specialization:"", level:""});
+            const finalData = {...formData, level: Number(formData.level)}
+            addMageHandler(finalData);
         }
+        // I didnt know how to send mage's level as a number so i did this ^
     }
 
     return (

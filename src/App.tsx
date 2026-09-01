@@ -80,8 +80,9 @@ function App() {
   function handleSpecializationChange(spec){
     setSelectedSpecialization(spec);
   }
-  function addMage(data){
-    console.log(data)
+  function addMage(mageData){
+    const newMage = {id: Math.floor(Math.random()*1000+1), ...mageData}
+    setMages(prev=>([...prev, newMage]))
   }
   return(
     <>
