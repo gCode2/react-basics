@@ -84,6 +84,7 @@ function App() {
     const newMage = {id: Math.floor(Math.random()*1000+1), ...mageData}
     setMages(prev=>([...prev, newMage]))
   }
+
   return(
     <>
     <div className="app">
@@ -98,7 +99,7 @@ function App() {
       </div>
     </div>
     <div>
-      <MagesList mages={searchText==="" ? mages : mages.filter(mage=>mage.name.includes(searchText))} mageDismissHandler={handleMageDismiss} selectedSpecialization={selectedSpecialization}/>
+      <MagesList mages={searchText==="" ? mages : mages.filter(mage=>(mage.name.toLowerCase().includes(searchText.toLowerCase())))} mageDismissHandler={handleMageDismiss} selectedSpecialization={selectedSpecialization}/>
     </div>
     <div>
       <GuildSummary mages={mages}/>
