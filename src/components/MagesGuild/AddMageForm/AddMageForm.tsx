@@ -19,8 +19,11 @@ function AddMageForm({addMageHandler}){
         if(!formData.level){
             newErrors.level = "Mage level is required"
         }
-        if(!Number(formData.level)){
+        if(!Number(formData.level) || !parseInt(formData.level)){
             newErrors.level = "Mage level must be a number"
+        }
+        if(formData.level <= 0){
+            newErrors.level = "Mage level must be greater than 0"
         }
         return newErrors;
     }
