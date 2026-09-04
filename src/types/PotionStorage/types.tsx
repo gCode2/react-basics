@@ -14,3 +14,7 @@ export interface PotionsListProps{
 export interface PotionProps{
     potion: Potion
 }
+export interface SearchBarProps{
+    searchText: string,
+    potionSearchHandler: (text: string) => void
+}

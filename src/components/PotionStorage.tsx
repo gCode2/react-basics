@@ -33,12 +33,19 @@ const POTIONS_LIST: Potion[] = [{
 
 function PotionStorage(){
     const [potions, setPotions] = useState<Potion[]>(POTIONS_LIST);
+    const [searchText, setSearchText] = useState("");
+    // as the TS already know "" stands for string, there's no need to type it
+
+    function handlePotionSearch(text: string){
+        setSearchText(text);
+        console.log(text)
+    }
 
     return (
         <>
-            <SearchBar/>
+            <SearchBar searchText={searchText} potionSearchHandler={handlePotionSearch}/>
             <PotionTypeFilter/>
-            <PotionsList potions={potions}/>
+            <PotionsList potions={searchText === "" ? potions : potions.filter(potion=>potion.name.includes(searchText))}/>
             <AddPotionForm/>
         </>
     )
