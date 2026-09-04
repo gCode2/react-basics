@@ -2,6 +2,9 @@
     font-family:arial;
     text-align:center;
 }
+body{
+    background: #444;
+}
 .app{
     display:flex;
     flex-direction: column;
