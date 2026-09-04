@@ -10,10 +10,14 @@ export interface Potion{
 
 export interface PotionsListProps{
     potions: Potion[],
-    selectedPotionType: string
+    selectedPotionType: string,
+    drinkPotionHandler: (potionToDrink: Potion) => void,
+    discardPotionHandler: (potionToRemove: Potion) => void
 }
 export interface PotionProps{
-    potion: Potion
+    potion: Potion,
+    drinkPotionHandler: (potionToDrink: Potion) => void,
+    discardPotionHandler: (potionToRemove: Potion) => void
 }
 export interface SearchBarProps{
     searchText: string,

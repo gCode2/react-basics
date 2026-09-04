@@ -1,6 +1,6 @@
 import type { PotionProps } from "../../../../types/PotionStorage/types";
 
-function Potion({potion}: PotionProps){
+function Potion({potion, drinkPotionHandler, discardPotionHandler}: PotionProps){
     return (
         <>
             <div className="potionCard">
@@ -18,12 +18,12 @@ function Potion({potion}: PotionProps){
                 </div>
                 <div className="itemControls">
                     <div>
-                        <button>
+                        <button onClick={()=>drinkPotionHandler(potion)}>
                             Drink
                         </button>
                     </div>
                     <div>
-                        <button>
+                        <button onClick={()=>discardPotionHandler(potion)}>
                             Discard
                         </button>
                     </div>

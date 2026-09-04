@@ -51,12 +51,34 @@ function PotionStorage(){
     function addPotion(potionData: NewPotionData){
        setPotions(prev=>([...prev, {id: Math.floor(Math.random()*1000+1), ...potionData}]));
     }
+    function drinkPotion(potionToDrink: Potion){
+        let hasPotion = true;
+        const updatedPotions = potions.map(potion=>{
+            if(potionToDrink.id !== potion.id){
+                return potion;
+            }
+            const updatedPotion = {...potion, quantity: potion.quantity-1};
+            if(updatedPotion.quantity <= 0){
+                hasPotion = false;
+            }
+            return updatedPotion;
+        })
+        setPotions(updatedPotions)
+        if(!hasPotion){
+            discardPotion(potionToDrink);
+        }
+    }
+    function discardPotion(potionToRemove: Potion){
+        const newPotionList = potions.filter(potion => potion !== potionToRemove);
+        setPotions(newPotionList);
+
+    }
     return (
         <>
             <div className="app">
                 <SearchBar searchText={searchText} potionSearchHandler={handlePotionSearch}/>
                 <PotionTypeFilter potionTypes={potionTypes} potionTypeChangeHandler={handlePotionTypeChange}/>
-                <PotionsList potions={searchText === "" ? potions : potions.filter(potion=>potion.name.includes(searchText))} selectedPotionType={selectedPotionType}/>
+                <PotionsList potions={searchText === "" ? potions : potions.filter(potion=>potion.name.includes(searchText))} selectedPotionType={selectedPotionType} drinkPotionHandler={drinkPotion} discardPotionHandler={discardPotion}/>
                 <AddPotionForm addPotionHandler={addPotion}/>
             </div> 
         </>
