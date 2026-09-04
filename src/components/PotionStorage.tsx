@@ -2,7 +2,7 @@ import AddPotionForm from "./PotionStorage/AddPotionForm/AddPotionForm";
 import PotionTypeFilter from "./PotionStorage/PotionControls/PotionTypeFilter/PotionTypeFilter";
 import SearchBar from "./PotionStorage/PotionControls/SearchBar/SearchBar";
 import PotionsList from "./PotionStorage/PotionsList/PotionsList";
-import type {Potion, PotionType} from "../types/PotionStorage/types"
+import type {NewPotionData, Potion, PotionType} from "../types/PotionStorage/types"
 import { useState } from "react";
 
 const POTIONS_LIST: Potion[] = [{
@@ -48,13 +48,16 @@ function PotionStorage(){
     function handlePotionTypeChange(potionType: string){
         setSelectedPotionType(potionType);
     }
+    function addPotion(potionData: NewPotionData){
+       setPotions(prev=>([...prev, {id: Math.floor(Math.random()*1000+1), ...potionData}]));
+    }
     return (
         <>
             <div className="app">
                 <SearchBar searchText={searchText} potionSearchHandler={handlePotionSearch}/>
                 <PotionTypeFilter potionTypes={potionTypes} potionTypeChangeHandler={handlePotionTypeChange}/>
                 <PotionsList potions={searchText === "" ? potions : potions.filter(potion=>potion.name.includes(searchText))} selectedPotionType={selectedPotionType}/>
-                <AddPotionForm/>
+                <AddPotionForm addPotionHandler={addPotion}/>
             </div> 
         </>
     )

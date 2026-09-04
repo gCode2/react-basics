@@ -174,7 +174,7 @@ body{
     border-radius: 5px;
     border: 1px solid #333;
 }
-.addMageForm{
+.addMageForm, .addPotionForm{
     display:flex;
     flex-direction: column;
     width: 250px;
@@ -182,4 +182,15 @@ body{
     padding: 10px;
     border:1px solid #333;
     border-radius:10px;
+}
+.error{
+    color:red;
+    font-size:12px;
+}
+.addPotionForm div{
+    display:flex;
+    flex-direction: column;
+}
+.formInputError{
+    border: 1px solid #ff0000;
 }
