@@ -18,12 +18,12 @@ function Potion({potion, drinkPotionHandler, discardPotionHandler}: PotionProps)
                 </div>
                 <div className="itemControls">
                     <div>
-                        <button onClick={()=>drinkPotionHandler(potion)}>
+                        <button onClick={()=>drinkPotionHandler(potion.id)}>
                             Drink
                         </button>
                     </div>
                     <div>
-                        <button onClick={()=>discardPotionHandler(potion)}>
+                        <button onClick={()=>discardPotionHandler(potion.id)}>
                             Discard
                         </button>
                     </div>

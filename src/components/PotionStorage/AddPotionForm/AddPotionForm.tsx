@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { AddPotionFormErrors, AddPotionFormProps, NewPotionData, PotionType } from "../../../types/PotionStorage/types";
+import type { AddPotionFormErrors, AddPotionFormProps, PotionType } from "../../../types/PotionStorage/types";
 
 function AddPotionForm({addPotionHandler}: AddPotionFormProps){
     const [inputs, setInputs] = useState({

@@ -34,7 +34,7 @@ const POTIONS_LIST: Potion[] = [{
 function PotionStorage(){
     const [potions, setPotions] = useState<Potion[]>(POTIONS_LIST);
     const [searchText, setSearchText] = useState("");
-    const [selectedPotionType, setSelectedPotionType] = useState("all")
+    const [selectedPotionType, setSelectedPotionType] = useState<PotionType | "all">("all")
     // as the TS already know "" stands for a string, there's no need to type it
     const potionTypes = getPotionTypes();
 
@@ -45,33 +45,17 @@ function PotionStorage(){
     function getPotionTypes(){
         return new Array("all", ...new Set(potions.map(potion=>potion.type)));
     }
-    function handlePotionTypeChange(potionType: string){
+    function handlePotionTypeChange(potionType: PotionType | "all"){
         setSelectedPotionType(potionType);
     }
     function addPotion(potionData: NewPotionData){
        setPotions(prev=>([...prev, {id: Math.floor(Math.random()*1000+1), ...potionData}]));
     }
-    function drinkPotion(potionToDrink: Potion){
-        let hasPotion = true;
-        const updatedPotions = potions.map(potion=>{
-            if(potionToDrink.id !== potion.id){
-                return potion;
-            }
-            const updatedPotion = {...potion, quantity: potion.quantity-1};
-            if(updatedPotion.quantity <= 0){
-                hasPotion = false;
-            }
-            return updatedPotion;
-        })
-        setPotions(updatedPotions)
-        if(!hasPotion){
-            discardPotion(potionToDrink);
-        }
+    function drinkPotion(id: number){
+        setPotions(prev=>prev.map(p=>p.id === id ? {...p, quantity: p.quantity-1} : p).filter(p=>p.quantity>0))
     }
-    function discardPotion(potionToRemove: Potion){
-        const newPotionList = potions.filter(potion => potion !== potionToRemove);
-        setPotions(newPotionList);
-
+    function discardPotion(id: number){
+        setPotions(prev=>(prev.filter(potion => potion.id !== id)));
     }
     return (
         <>

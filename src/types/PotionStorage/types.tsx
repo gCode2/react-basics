@@ -11,21 +11,21 @@ export interface Potion{
 export interface PotionsListProps{
     potions: Potion[],
     selectedPotionType: string,
-    drinkPotionHandler: (potionToDrink: Potion) => void,
-    discardPotionHandler: (potionToRemove: Potion) => void
+    drinkPotionHandler: (id: number) => void,
+    discardPotionHandler: (id: number) => void
 }
 export interface PotionProps{
     potion: Potion,
-    drinkPotionHandler: (potionToDrink: Potion) => void,
-    discardPotionHandler: (potionToRemove: Potion) => void
+    drinkPotionHandler: (id: number) => void,
+    discardPotionHandler: (id: number) => void
 }
 export interface SearchBarProps{
     searchText: string,
     potionSearchHandler: (text: string) => void
 }
 export interface PotionTypeFilterProps{
-    potionTypes: string[],
-    potionTypeChangeHandler: (potionType: string) => void
+    potionTypes: PotionType[],
+    potionTypeChangeHandler: (potionType: PotionType | "all") => void
 }
 export interface AddPotionFormProps{
     addPotionHandler: (potionData: NewPotionData) => void
