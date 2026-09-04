@@ -1,7 +1,7 @@
 import { useState } from "react";
 import type { AddPotionFormErrors, AddPotionFormProps, PotionType } from "../../../types/PotionStorage/types";
 
-function AddPotionForm({addPotionHandler}: AddPotionFormProps){
+function AddPotionForm({addPotionHandler, potionTypes}: AddPotionFormProps){
     const [inputs, setInputs] = useState({
         name: "",
         type: "",
@@ -76,21 +76,11 @@ function AddPotionForm({addPotionHandler}: AddPotionFormProps){
                     <option value="" disabled hidden>
                         Choose a potion type
                     </option>
-                    <option>
-                        Health
-                    </option>
-                    <option>
-                        Mana
-                    </option>
-                    <option>
-                        Stamina
-                    </option>
-                    <option>
-                        Strength
-                    </option>
-                    <option>
-                        Agility
-                    </option>
+                    {potionTypes.map(potionType=>(
+                        <option key={potionType}>
+                            {potionType}
+                        </option>
+                    ))}
                     </select>
                     {errors.type ? <span className="error">{errors.type}</span> : ""}
                 </div>

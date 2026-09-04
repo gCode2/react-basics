@@ -36,7 +36,8 @@ function PotionStorage(){
     const [searchText, setSearchText] = useState("");
     const [selectedPotionType, setSelectedPotionType] = useState<PotionType | "all">("all")
     // as the TS already know "" stands for a string, there's no need to type it
-    const potionTypes = getPotionTypes();
+    const potionTypes = getPotionTypes() as (PotionType | "all")[];
+    const allPotionTypes = ["Health", "Mana", "Stamina", "Strength", "Agility"] as PotionType[]
 
     function handlePotionSearch(text: string){
         setSearchText(text);
@@ -63,7 +64,7 @@ function PotionStorage(){
                 <SearchBar searchText={searchText} potionSearchHandler={handlePotionSearch}/>
                 <PotionTypeFilter potionTypes={potionTypes} potionTypeChangeHandler={handlePotionTypeChange}/>
                 <PotionsList potions={searchText === "" ? potions : potions.filter(potion=>potion.name.includes(searchText))} selectedPotionType={selectedPotionType} drinkPotionHandler={drinkPotion} discardPotionHandler={discardPotion}/>
-                <AddPotionForm addPotionHandler={addPotion}/>
+                <AddPotionForm addPotionHandler={addPotion} potionTypes={allPotionTypes}/>
             </div> 
         </>
     )

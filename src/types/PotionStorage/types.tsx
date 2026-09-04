@@ -10,7 +10,7 @@ export interface Potion{
 
 export interface PotionsListProps{
     potions: Potion[],
-    selectedPotionType: string,
+    selectedPotionType: PotionType | "all",
     drinkPotionHandler: (id: number) => void,
     discardPotionHandler: (id: number) => void
 }
@@ -24,11 +24,12 @@ export interface SearchBarProps{
     potionSearchHandler: (text: string) => void
 }
 export interface PotionTypeFilterProps{
-    potionTypes: PotionType[],
+    potionTypes: (PotionType | "all")[],
     potionTypeChangeHandler: (potionType: PotionType | "all") => void
 }
 export interface AddPotionFormProps{
-    addPotionHandler: (potionData: NewPotionData) => void
+    addPotionHandler: (potionData: NewPotionData) => void,
+    potionTypes: PotionType[]
 }
 export interface NewPotionData{
     name: string,
@@ -42,4 +43,3 @@ export interface AddPotionFormErrors{
     quantity: string,
     note?: string
 }
-//this interface isnt needed, right?
