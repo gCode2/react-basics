@@ -27,7 +27,8 @@ function AddPotionForm({addPotionHandler}: AddPotionFormProps){
         if(hasErrors){
             setErrors(validationErrors);
         }else{
-            setErrors({name: "", type: "", quantity: ""})
+            setErrors({name: "", type: "", quantity: "", note: ""})
+            setInputs({name: "", type: "", quantity: "", note: ""})
             
             addPotionHandler({
                 name: inputs.name,
@@ -67,11 +68,11 @@ function AddPotionForm({addPotionHandler}: AddPotionFormProps){
                     <h2>Add potion</h2>
                 </div>
                 <div>
-                    <input type="text" name="name" onChange={handleChange} placeholder="potion name" className={errors.name ? "formInputError" : ""}/>
+                    <input type="text" name="name" onChange={handleChange} placeholder="potion name" className={errors.name ? "formInputError" : ""} value={inputs.name}/>
                     {errors.name ? <span className="error">{errors.name}</span> : ""}
                 </div>
                 <div>
-                    <select name="type" onChange={handleChange} defaultValue={""} className={errors.type ? "formInputError" : ""}>
+                    <select name="type" onChange={handleChange} className={errors.type ? "formInputError" : ""} value={inputs.type}>
                     <option value="" disabled hidden>
                         Choose a potion type
                     </option>
@@ -94,11 +95,11 @@ function AddPotionForm({addPotionHandler}: AddPotionFormProps){
                     {errors.type ? <span className="error">{errors.type}</span> : ""}
                 </div>
                 <div>
-                    <input type="text" name="quantity" onChange={handleChange} placeholder="potion quantity" className={errors.quantity ? "formInputError" : ""}/>
+                    <input type="text" name="quantity" onChange={handleChange} placeholder="potion quantity" className={errors.quantity ? "formInputError" : ""} value={inputs.quantity}/>
                     {errors.quantity ? <span className="error">{errors.quantity}</span> : ""}
                 </div>
                 <div>
-                    <input type="text" name="note" placeholder="note" onChange={handleChange}/>
+                    <input type="text" name="note" placeholder="note" onChange={handleChange} value={inputs.note}/>
                 </div>
                 <div>
                     <button type="submit">

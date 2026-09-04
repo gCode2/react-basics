@@ -8,7 +8,7 @@ function SearchBar({searchText, potionSearchHandler}: SearchBarProps){
 
     return (
         <>
-            <input type="text" value={searchText} className="searchBar" onChange={handleChange}/>
+            <input type="text" name="searchBar" value={searchText} className="searchBar" onChange={handleChange}/>
         </>
     )
 }
