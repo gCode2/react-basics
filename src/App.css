@@ -59,7 +59,7 @@ body{
     border-radius: 10px;
     padding:10px; 
 }
-.spellCard, .monsterCard{
+.spellCard, .monsterCard, .potionCard{
     height: 150px;
     width: 200px;
     border: 1px solid #333333;
@@ -69,6 +69,15 @@ body{
     flex-direction: column;
     align-items:center;
     justify-content: space-evenly;
+}
+.itemControls{
+    display:flex;
+    flex-direction: row;
+    gap: 5px;
+}
+.itemID{
+    color:#aaa;
+    font-size: 14px;
 }
 .difficultyChips, .categoryChips, .specializationChips{
     display:flex;
@@ -150,7 +159,7 @@ body{
     align-items: center;
     justify-content: space-around;
 }
-.notesListHolder, .magesListHolder{
+.notesListHolder, .magesListHolder, .potionsListHolder{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

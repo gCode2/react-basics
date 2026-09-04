@@ -38,7 +38,7 @@ function PotionStorage(){
         <>
             <SearchBar/>
             <PotionTypeFilter/>
-            <PotionsList/>
+            <PotionsList potions={potions}/>
             <AddPotionForm/>
         </>
     )

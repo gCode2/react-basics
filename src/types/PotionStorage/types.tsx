@@ -7,3 +7,10 @@ export interface Potion{
     quantity: number,
     note?: string
 }
+
+export interface PotionsListProps{
+    potions: Potion[]
+}
+export interface PotionProps{
+    potion: Potion
+}
