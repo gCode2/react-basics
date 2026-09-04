@@ -79,7 +79,7 @@ body{
     color:#aaa;
     font-size: 14px;
 }
-.difficultyChips, .categoryChips, .specializationChips{
+.difficultyChips, .categoryChips, .specializationChips, .potionTypeChips{
     display:flex;
     flex-direction:row;
     width: 400px;

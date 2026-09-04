@@ -34,19 +34,28 @@ const POTIONS_LIST: Potion[] = [{
 function PotionStorage(){
     const [potions, setPotions] = useState<Potion[]>(POTIONS_LIST);
     const [searchText, setSearchText] = useState("");
-    // as the TS already know "" stands for string, there's no need to type it
+    const [selectedPotionType, setSelectedPotionType] = useState("all")
+    // as the TS already know "" stands for a string, there's no need to type it
+    const potionTypes = getPotionTypes();
 
     function handlePotionSearch(text: string){
         setSearchText(text);
-        console.log(text)
     }
-
+    
+    function getPotionTypes(){
+        return new Array("all", ...new Set(potions.map(potion=>potion.type)));
+    }
+    function handlePotionTypeChange(potionType: string){
+        setSelectedPotionType(potionType);
+    }
     return (
         <>
-            <SearchBar searchText={searchText} potionSearchHandler={handlePotionSearch}/>
-            <PotionTypeFilter/>
-            <PotionsList potions={searchText === "" ? potions : potions.filter(potion=>potion.name.includes(searchText))}/>
-            <AddPotionForm/>
+            <div className="app">
+                <SearchBar searchText={searchText} potionSearchHandler={handlePotionSearch}/>
+                <PotionTypeFilter potionTypes={potionTypes} potionTypeChangeHandler={handlePotionTypeChange}/>
+                <PotionsList potions={searchText === "" ? potions : potions.filter(potion=>potion.name.includes(searchText))} selectedPotionType={selectedPotionType}/>
+                <AddPotionForm/>
+            </div> 
         </>
     )
 }

@@ -9,7 +9,8 @@ export interface Potion{
 }
 
 export interface PotionsListProps{
-    potions: Potion[]
+    potions: Potion[],
+    selectedPotionType: string
 }
 export interface PotionProps{
     potion: Potion
@@ -17,4 +18,8 @@ export interface PotionProps{
 export interface SearchBarProps{
     searchText: string,
     potionSearchHandler: (text: string) => void
+}
+export interface PotionTypeFilterProps{
+    potionTypes: string[],
+    potionTypeChangeHandler: (potionType: string) => void
 }
