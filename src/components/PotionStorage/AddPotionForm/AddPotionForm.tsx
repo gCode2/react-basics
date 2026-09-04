@@ -50,12 +50,12 @@ function AddPotionForm({addPotionHandler}: AddPotionFormProps){
         if(!inputs.type.trim()){
             newErrors.type = "Potion type is required";
         }
-        if(!inputs.type.trim()){
+        if(!inputs.quantity.trim()){
             newErrors.quantity = "Potion quantity is required";
         }else if (!/^\d+$/.test(inputs.quantity)) {
             newErrors.quantity = "Potion quantity must be a whole number";
         } else if (Number(inputs.quantity) <= 0) {
-            newErrors.quantity = "Mage level must be greater than 0";
+            newErrors.quantity = "Potion quantity must be greater than 0";
         }
 
         return newErrors;
