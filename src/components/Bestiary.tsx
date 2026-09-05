@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Creature, CreatureApiResponse } from "../types/Bestiary/types";
+import type { Creature, CreatureApiResponse, RawCreatureApiResponse } from "../types/Bestiary/types";
 import CreaturesList from "./Bestiary/CreaturesList/CreaturesList";
 import SearchBar from "./Bestiary/BestiaryControls/SearchBar/SearchBar";
 import SortHandler from "./Bestiary/BestiaryControls/SortHandler/SortHandler";
@@ -15,19 +15,20 @@ function Bestiary(){
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    async function fetchCreatures(url: string){
+    async function fetchCreatures(url: string): Promise<void>{
         try{
             setIsLoading(true);
             setError(null);
 
             const response = await fetch(url);
-
+            
             if(!response.ok){
                 throw new Error (`HTTP Error! Status: ${response.status}`)
             }
 
-            const data: CreatureApiResponse = await response.json();
-
+            const data: RawCreatureApiResponse = await response.json();
+            // ^^ wczesniej tu mialem data: CreatureApiResponse - co jest lepsze?
+            console.log(data)
             setCreatures(data.results);
 
         } catch (error){

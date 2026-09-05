@@ -6,6 +6,15 @@ export interface CreatureApiResponse{
     count: number,
     results: Creature[]
 }
+export interface RawCreatureApiResponse{
+    count: number,
+    next: string | null,
+    previous: string | null,
+    results: {
+        name: string;
+        url: string;
+    }[]
+}
 export interface CreaturesListProps{
     creatures: Creature[]
 }
