@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
 import type { Entity, RawEntityApiResponse } from "../types/SquadBuilder/types";
+import SearchBar from "./SquadBuilder/SquadBuilderControls/SearchBar/SearchBar";
+import SquadNameSort from "./SquadBuilder/SquadBuilderControls/SquadNameSort/SquadNameSort";
+import SquadStatusFilter from "./SquadBuilder/SquadBuilderControls/SquadStatusFilter/SquadStatusFilter";
+import EntityList from "./SquadBuilder/EntityList/EntityList";
 
 const ENTITIES_URL = "https://rickandmortyapi.com/api/character"
 
@@ -50,7 +54,33 @@ function SquadBuilder(){
 
     return (
         <>
-           
+           <div className="app">
+                <div className="container">
+                    <div>
+                        <SearchBar/>
+                    </div>
+                    <div>
+                        <SquadNameSort/>
+                    </div>
+                    <div>
+                        <SquadStatusFilter/>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <h2>Entities in your Squad</h2>
+                    </div>
+                    <EntityList entities={squad} actionLabel="dismiss"/>
+                </div>
+
+                <div>
+                    <div>
+                        <h2>Entities to recruit</h2>
+                    </div>
+                    <EntityList entities={entities} actionLabel="recruit"/>
+                </div>
+                
+           </div>
         </>
     )
 }

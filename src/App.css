@@ -101,11 +101,7 @@ body{
     text-align:center;
     height: 1rem;
 }
-.chip:hover{
-    background: #eeeeee;
-    cursor:pointer;
-    transition: 0.5s;
-}
+
 .questCard{
     border: 1px solid black;
     height: 150px;
@@ -165,7 +161,7 @@ body{
     align-items: center;
     justify-content: space-around;
 }
-.notesListHolder, .magesListHolder, .potionsListHolder, .creatureListHolder{
+.notesListHolder, .magesListHolder, .potionsListHolder, .creatureListHolder, .entityList{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -199,4 +195,66 @@ body{
 }
 .formInputError{
     border: 1px solid #ff0000;
+}
+.entityCard{
+    height: 250px;
+    width: 200px;
+    border: 1px solid #333333;
+    text-align:center;
+    border-radius:10px;
+    display:flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items:center;
+    background: #999;
+}
+.imgHolder{
+    width: 200px;
+    height:150px;
+    display: flex;
+}
+.entityImage{
+    width:100%;
+    height: 100%;
+    object-fit: fill;
+    clip-path: inset(0 round 10px 10px 0 0); 
+}
+.entityDetails{
+    padding: 5px;
+}
+.entityId{
+    height: 15px;
+    font-size: 15px;
+    position:absolute;
+    top: -242px;
+    left: 60px;
+    padding: 3px;
+    background: #eee;
+    border-radius: 5px;
+}
+.entityHolder{
+    position:relative;
+}
+.actionButtonHolder{
+    position:relative;
+    display:flex;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+.actionChip{
+    position:absolute;
+    z-index: 1;
+    bottom: 10px;
+    right: 10px;
+}
+.recruit{
+    background:#b8ff9c
+}
+.chip:hover{
+    background: #eeeeee;
+    cursor:pointer;
+    transition: 0.5s;
+}
+.recruit:hover{
+    background:#8eff61;
 }

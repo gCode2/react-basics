@@ -42,3 +42,12 @@ export interface RawEntityApiResponse{
     },
     results: RawEntityDetails[]
 }
+export interface EntityListProps{
+    entities: Entity[],
+    actionLabel: string
+}
+
+export interface EntityCardProps{
+    entity: Entity,
+    actionLabel: string
+}
