@@ -3,7 +3,7 @@ import type { CreatureProps } from "../../../../types/Bestiary/types";
 function Creature({creature}:CreatureProps){
     return (
         <>
-            <div>
+            <div className="itemCard">
                 {/* <div>
                     {/* <img src={`${creature.url}`}/> }
                 </div> */}

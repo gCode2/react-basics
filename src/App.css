@@ -159,7 +159,7 @@ body{
     align-items: center;
     justify-content: space-around;
 }
-.notesListHolder, .magesListHolder, .potionsListHolder{
+.notesListHolder, .magesListHolder, .potionsListHolder, .creatureListHolder{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;

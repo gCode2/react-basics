@@ -13,22 +13,6 @@ function Bestiary(){
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
 
-    // function fetchCreatures(url: string){
-    //     fetch(url).then((response) => {
-    //         if(!response.ok){
-    //             throw new Error (`HTTP Error! status: ${response.status}`);
-    //         }
-    //         return response.json();
-    //     }).then((data: Creature[])=>{
-    //         setCreatures(data);
-    //         console.log(data)
-    //         setIsLoading(false);
-    //     }).catch((err)=>{
-    //         setError(err.message);
-    //         setIsLoading(false)
-    //     })
-    // }
-
     async function fetchCreatures(url: string){
         try{
             setIsLoading(true);
@@ -60,8 +44,8 @@ function Bestiary(){
         fetchCreatures("https://pokeapi.co/api/v2/pokemon?limit=151");
     }, [])
 
-    function consoleLogCreatures(){
-        console.log(creatures);
+    function handleSearch(text: string){
+        setSearchText(text);
     }
 
     return (
@@ -69,15 +53,18 @@ function Bestiary(){
             <div className="app">
                 <div>
                     <div>
-                        <SearchBar/>
+                        <SearchBar searchText={searchText} searchHandler={handleSearch}/>
                     </div>
                     <div>
                         <SortHandler/>
                     </div>
                 </div>
                 <div>
-                    {isLoading ? <p>Fetching creatures... ⏳</p> : <CreaturesList creatures={creatures}/>}
-                    
+                    {isLoading ? 
+                    <p>Fetching creatures... ⏳</p> : 
+                    <CreaturesList creatures={searchText==="" ? creatures : creatures.filter(creature=>creature.name.includes(searchText))}/>}
+
+                    {error ? <p>{error}</p> : ""}
                 </div>
             </div>
         </>

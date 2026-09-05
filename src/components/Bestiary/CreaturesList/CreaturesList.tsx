@@ -4,7 +4,7 @@ import Creature from "./Creature/Creature";
 function CreaturesList({creatures}:CreaturesListProps){
     return (
         <>
-            <div>
+            <div className="creatureListHolder">
                 {
                     creatures.map(creature=>(
                         <Creature key={creature.name} creature={creature}/>
