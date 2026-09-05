@@ -5,8 +5,10 @@
 // import FifthReminder from './components/FifthReminder'
 // import MagesJournal from './components/MagesJournal'
 // import MagesGuild from './components/MagesGuild';
+// import PotionStorage from './components/PotionStorage'
 import './App.css'
-import PotionStorage from './components/PotionStorage'
+import Bestiary from './components/Bestiary'
+
 
 
 
@@ -16,7 +18,7 @@ function App() {
 
   return(
     <>
-      <PotionStorage/>
+      <Bestiary/>
     </>
     // <FirstReminder/>
     // <SecondReminder/>
@@ -25,6 +27,7 @@ function App() {
     // <FifthReminder/>
     // <MagesJournal/>
     // <MagesGuild/>
+    // <PotionStorage/>
   )
 }
 
