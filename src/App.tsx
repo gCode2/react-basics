@@ -8,6 +8,7 @@
 // import PotionStorage from './components/PotionStorage'
 // import Bestiary from './components/Bestiary'
 import './App.css'
+import SquadBuilder from './components/SquadBuilder'
 
 
 
@@ -19,7 +20,7 @@ function App() {
 
   return(
     <>
-      
+      <SquadBuilder/>
     </>
     // <FirstReminder/>
     // <SecondReminder/>
