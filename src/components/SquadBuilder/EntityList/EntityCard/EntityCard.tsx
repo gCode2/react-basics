@@ -1,13 +1,13 @@
 import type { EntityCardProps } from "../../../../types/SquadBuilder/types"
 
-function EntityCard({entity, actionLabel}: EntityCardProps){
+function EntityCard({entity, actionLabel, actionHandler}: EntityCardProps){
     return(
         <>
             <div className="entityCard">
                 <div className="imgHolder">
                     <img src={`${entity.image}`} className="entityImage"/>
                     <div className="actionButtonHolder">
-                        <div className={`actionChip chip ${actionLabel}`}>
+                        <div className={`actionChip chip ${actionLabel}`} onClick={()=>actionHandler(entity.id)}>
                             {actionLabel}
                         </div>
                     </div>

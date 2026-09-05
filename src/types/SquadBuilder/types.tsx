@@ -45,9 +45,11 @@ export interface RawEntityApiResponse{
 export interface EntityListProps{
     entities: Entity[],
     actionLabel: string
+    actionHandler: (id: number) => void
 }
 
 export interface EntityCardProps{
     entity: Entity,
-    actionLabel: string
+    actionLabel: string,
+    actionHandler: (id: number) => void
 }

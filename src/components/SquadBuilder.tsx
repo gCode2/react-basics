@@ -52,6 +52,12 @@ function SquadBuilder(){
         fetchEntities(ENTITIES_URL);
     }, []);
 
+    function recruitSquadMember(id: number){
+        const entityToRecruit = entities.filter(ent=>ent.id === id)
+        // console.log(entity)
+        setSquad(prev=>[...prev, ...entityToRecruit])
+    }
+
     return (
         <>
            <div className="app">
@@ -77,7 +83,8 @@ function SquadBuilder(){
                     <div>
                         <h2>Entities to recruit</h2>
                     </div>
-                    <EntityList entities={entities} actionLabel="recruit"/>
+                    {isLoading ? <p>Loading entities... </p> : <EntityList entities={entities} actionLabel="recruit" actionHandler={recruitSquadMember}/>}
+                    
                 </div>
                 
            </div>
