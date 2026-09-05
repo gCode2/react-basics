@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Creature, CreatureApiResponse, RawCreatureApiResponse } from "../types/Bestiary/types";
+import type { Creature, RawCreatureApiResponse, SortType } from "../types/Bestiary/types";
 import CreaturesList from "./Bestiary/CreaturesList/CreaturesList";
 import SearchBar from "./Bestiary/BestiaryControls/SearchBar/SearchBar";
 import SortHandler from "./Bestiary/BestiaryControls/SortHandler/SortHandler";
@@ -28,7 +28,6 @@ function Bestiary(){
 
             const data: RawCreatureApiResponse = await response.json();
             // ^^ wczesniej tu mialem data: CreatureApiResponse - co jest lepsze?
-            console.log(data)
             setCreatures(data.results);
 
         } catch (error: unknown){
@@ -50,7 +49,7 @@ function Bestiary(){
     function refreshCreatures(){
         fetchCreatures(CREATURES_URL);
     }
-    function handleSort(sort: string){
+    function handleSort(sort: SortType){
         const creaturesToSort = [...creatures];
         switch(sort){
             case "asc":

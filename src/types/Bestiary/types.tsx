@@ -1,19 +1,13 @@
+export type SortType = "asc" | "desc"
 export interface Creature{
     name: string,
     url: string
-}
-export interface CreatureApiResponse{
-    count: number,
-    results: Creature[]
 }
 export interface RawCreatureApiResponse{
     count: number,
     next: string | null,
     previous: string | null,
-    results: {
-        name: string;
-        url: string;
-    }[]
+    results: Creature[]
 }
 export interface CreaturesListProps{
     creatures: Creature[]
@@ -26,5 +20,5 @@ export interface SearchBarProps{
     searchHandler: (text: string) => void
 }
 export interface SortHandlerProps{
-    sortHandler: (text: string) => void
+    sortHandler: (text: SortType) => void
 }
