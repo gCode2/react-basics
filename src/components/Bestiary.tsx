@@ -4,6 +4,8 @@ import CreaturesList from "./Bestiary/CreaturesList/CreaturesList";
 import SearchBar from "./Bestiary/BestiaryControls/SearchBar/SearchBar";
 import SortHandler from "./Bestiary/BestiaryControls/SortHandler/SortHandler";
 
+const CREATURES_URL = "https://pokeapi.co/api/v2/pokemon?limit=151";
+
 function Bestiary(){
 
     const [creatures, setCreatures] = useState<Creature[]>([]);
@@ -41,9 +43,30 @@ function Bestiary(){
     }
 
     useEffect(()=>{
-        fetchCreatures("https://pokeapi.co/api/v2/pokemon?limit=151");
+        fetchCreatures(CREATURES_URL);
     }, [])
 
+    function refreshCreatures(){
+        fetchCreatures(CREATURES_URL);
+    }
+    function handleSort(sort: string){
+        const creaturesToSort = [...creatures];
+        switch(sort){
+            case "asc":
+                creaturesToSort.sort((a, b)=>{
+                    return a.name.localeCompare(b.name)
+                })
+            break;
+            case "desc":
+                creaturesToSort.sort((a, b)=>{
+                    return b.name.localeCompare(a.name)
+                })
+            break;
+            default:
+                console.log("something went wrong")
+        }
+        setCreatures(creaturesToSort);
+    }
     function handleSearch(text: string){
         setSearchText(text);
     }
@@ -51,13 +74,18 @@ function Bestiary(){
     return (
         <>
             <div className="app">
-                <div>
+                <div className="container">
                     <div>
                         <SearchBar searchText={searchText} searchHandler={handleSearch}/>
                     </div>
                     <div>
-                        <SortHandler/>
+                        <SortHandler sortHandler={handleSort}/>
                     </div>
+                </div>
+                <div>
+                    <button onClick={refreshCreatures}>
+                        Refresh Creatures
+                    </button>
                 </div>
                 <div>
                     {isLoading ? 

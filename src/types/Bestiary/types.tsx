@@ -16,3 +16,6 @@ export interface SearchBarProps{
     searchText: string,
     searchHandler: (text: string) => void
 }
+export interface SortHandlerProps{
+    sortHandler: (text: string) => void
+}

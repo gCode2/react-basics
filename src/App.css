@@ -11,6 +11,12 @@ body{
     align-items: center;
     gap:10px;
 }
+.container{
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    gap:10px;
+}
 .main{
     text-align:center;
 }
@@ -79,7 +85,7 @@ body{
     color:#aaa;
     font-size: 14px;
 }
-.difficultyChips, .categoryChips, .specializationChips, .potionTypeChips{
+.difficultyChips, .categoryChips, .specializationChips, .potionTypeChips, .creatureChips{
     display:flex;
     flex-direction:row;
     width: 400px;
