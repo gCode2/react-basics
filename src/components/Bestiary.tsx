@@ -31,7 +31,7 @@ function Bestiary(){
             console.log(data)
             setCreatures(data.results);
 
-        } catch (error){
+        } catch (error: unknown){
             if(error instanceof Error){
                 setError(error.message);
             } else{
