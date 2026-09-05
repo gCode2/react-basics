@@ -27,7 +27,6 @@ function Bestiary(){
             }
 
             const data: RawCreatureApiResponse = await response.json();
-            // ^^ wczesniej tu mialem data: CreatureApiResponse - co jest lepsze?
             setCreatures(data.results);
 
         } catch (error: unknown){
