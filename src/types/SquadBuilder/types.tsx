@@ -1,6 +1,3 @@
-// export interface SquadMember{
-
-// }
 export type EntityStatus = "Alive" | "Dead" | "unknown"
 export type GenderType = "Male" | "Female" | "unknown"
 export interface RawEntityDetails{

@@ -53,9 +53,12 @@ function SquadBuilder(){
     }, []);
 
     function recruitSquadMember(id: number){
-        const entityToRecruit = entities.filter(ent=>ent.id === id)
-        // console.log(entity)
-        setSquad(prev=>[...prev, ...entityToRecruit])
+        setSquad(prev=>[...prev, ...entities.filter(ent=>ent.id === id)])
+        setEntities(prev=>[...prev.filter(p=>p.id !== id)]);
+    }
+    function dismissSquadMember(id: number){
+        setSquad(prev=>[...prev.filter(p=>p.id !== id)]);
+        setEntities(prev=>[...prev, ...squad.filter(ent=>ent.id === id)])
     }
 
     return (
@@ -76,7 +79,7 @@ function SquadBuilder(){
                     <div>
                         <h2>Entities in your Squad</h2>
                     </div>
-                    <EntityList entities={squad} actionLabel="dismiss"/>
+                    <EntityList entities={squad} actionLabel="dismiss" actionHandler={dismissSquadMember}/>
                 </div>
 
                 <div>
