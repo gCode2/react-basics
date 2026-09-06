@@ -65,6 +65,26 @@ function SquadBuilder(){
         setSearchText(text);
     }
 
+    function handleSort(sortOrder: string){
+        const entitiesToSort: Entity[] = [...entities];
+        // nie wiem czy to typowanie tu ma sens, ale chcialem miec pewnosc, ze ta zmienna bedzie przyjmowac tylko i wylacznie tablice z Entity
+        switch(sortOrder){
+            case "asc":
+                entitiesToSort.sort((a,b) => {
+                    return a.name.localeCompare(b.name)
+                })
+            break;
+            case "desc":
+                entitiesToSort.sort((a,b) => {
+                    return b.name.localeCompare(a.name)
+                })
+            break;
+            default:
+                console.error("Unknown error occured")
+        }
+        setEntities(entitiesToSort);
+    }
+
     return (
         <>
            <div className="app">
@@ -73,7 +93,7 @@ function SquadBuilder(){
                         <SearchBar searchText={searchText} changeHandler={handleChange}/>
                     </div>
                     <div>
-                        <SquadNameSort/>
+                        <SquadNameSort sortHandler={handleSort}/>
                     </div>
                     <div>
                         <SquadStatusFilter/>

@@ -55,3 +55,7 @@ export interface SearchBarProps{
     searchText: string,
     changeHandler: (text: string) => void
 }
+
+export interface SquadNameSortProps{
+    sortHandler: (sortOrder: string) => void
+}
