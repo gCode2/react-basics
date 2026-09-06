@@ -1,6 +1,7 @@
 export const ENTITY_STATUSES = ["Alive", "Dead", "unknown"] as const;
 export type EntityStatus = typeof ENTITY_STATUSES[number];
 export type GenderType = "Male" | "Female" | "unknown"
+export type SortType = "asc" | "desc"
 export interface RawEntityDetails{
     created: Date,
     episode: string[],
@@ -17,10 +18,8 @@ export interface RawEntityDetails{
         url: string
     },
     species: string,
-    //species moze byc tez zbiorem literałów - ale nie wiem tego, nie mam dostepu do pelnej bazy z tego endpointu - nie wiem czy human i alien to jedyne pola?
     status: EntityStatus,
     type: string,
-    // type w niektórych entity jest pustym polem obiektu - '' - czy w zwiazku z tym moge zastosowac zapis "type?: string" czy raczej zostawić tak?
     url: string
 }
 export interface Entity{
@@ -58,7 +57,7 @@ export interface SearchBarProps{
 }
 
 export interface SquadNameSortProps{
-    sortHandler: (sortOrder: string) => void
+    sortHandler: (sortOrder: SortType) => void
 }
 
 export interface SquadStatusFilterProps{

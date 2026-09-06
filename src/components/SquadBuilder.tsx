@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { ENTITY_STATUSES, type Entity, type EntityStatus, type RawEntityApiResponse } from "../types/SquadBuilder/types";
+import { ENTITY_STATUSES, type Entity, type EntityStatus, type RawEntityApiResponse, type SortType } from "../types/SquadBuilder/types";
 import SearchBar from "./SquadBuilder/SquadBuilderControls/SearchBar/SearchBar";
 import SquadNameSort from "./SquadBuilder/SquadBuilderControls/SquadNameSort/SquadNameSort";
 import SquadStatusFilter from "./SquadBuilder/SquadBuilderControls/SquadStatusFilter/SquadStatusFilter";
@@ -68,7 +68,7 @@ function SquadBuilder(){
         setSearchText(text);
     }
 
-    function handleSort(sortOrder: string){
+    function handleSort(sortOrder: SortType){
         const entitiesToSort: Entity[] = [...entities];
         // nie wiem czy to typowanie tu ma sens, ale chcialem miec pewnosc, ze ta zmienna bedzie przyjmowac tylko i wylacznie tablice z Entity
         switch(sortOrder){
@@ -125,6 +125,7 @@ function SquadBuilder(){
                             />
                         )
                     }
+                    {error ? <p>{error}</p> : ""}
                 </div>
                 <div>
                     <div>
