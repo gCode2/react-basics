@@ -11,7 +11,8 @@ function SquadBuilder(){
     const [entities, setEntities] = useState<Entity[]>([])
     const [squad, setSquad] = useState<Entity[]>([]);
     const [isLoading, setLoading] = useState(true);
-    const [error, setError] = useState<string | null>(null)
+    const [error, setError] = useState<string | null>(null);
+    const [searchText, setSearchText] = useState("");
 
     async function fetchEntities(url: string): Promise<void>{
         try{
@@ -60,13 +61,16 @@ function SquadBuilder(){
         setSquad(prev=>[...prev.filter(p=>p.id !== id)]);
         setEntities(prev=>[...prev, ...squad.filter(ent=>ent.id === id)])
     }
+    function handleChange(text: string){
+        setSearchText(text);
+    }
 
     return (
         <>
            <div className="app">
                 <div className="container">
                     <div>
-                        <SearchBar/>
+                        <SearchBar searchText={searchText} changeHandler={handleChange}/>
                     </div>
                     <div>
                         <SquadNameSort/>
@@ -77,18 +81,20 @@ function SquadBuilder(){
                 </div>
                 <div>
                     <div>
-                        <h2>Entities in your Squad</h2>
-                    </div>
-                    <EntityList entities={squad} actionLabel="dismiss" actionHandler={dismissSquadMember}/>
-                </div>
-
-                <div>
-                    <div>
                         <h2>Entities to recruit</h2>
                     </div>
-                    {isLoading ? <p>Loading entities... </p> : <EntityList entities={entities} actionLabel="recruit" actionHandler={recruitSquadMember}/>}
+                    {isLoading ? <p>Loading entities... </p> : <EntityList entities={searchText==="" ? entities : entities.filter(entity=>entity.name.toLowerCase().includes(searchText.toLowerCase()))} actionLabel="recruit" actionHandler={recruitSquadMember}/>}
                     
                 </div>
+                <div>
+                    <div>
+                        <h2>Entities in your Squad</h2>
+                    </div>
+                    {squad.length > 0 ? <EntityList entities={squad} actionLabel="dismiss" actionHandler={dismissSquadMember}/> : "No squad members to display"}
+                    
+                </div>
+
+                
                 
            </div>
         </>

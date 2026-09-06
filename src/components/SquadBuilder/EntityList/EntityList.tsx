@@ -6,9 +6,10 @@ function EntityList({entities, actionLabel, actionHandler}: EntityListProps){
     <>
         <div className="entityList">
             {
+                entities.length > 0 ?
                 entities.map(entity=>(
                     <EntityCard key={entity.id} entity={entity} actionLabel={actionLabel} actionHandler={actionHandler}/>
-                ))
+                )) : "No entities found"
             }
         </div>
     </>

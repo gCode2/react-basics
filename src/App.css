@@ -258,3 +258,9 @@ body{
 .recruit:hover{
     background:#8eff61;
 }
+.dismiss{
+    background: #ff8686;
+}
+.dismiss:hover{
+    background: #ff5e5e;
+}

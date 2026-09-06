@@ -50,3 +50,8 @@ export interface EntityCardProps{
     actionLabel: string,
     actionHandler: (id: number) => void
 }
+
+export interface SearchBarProps{
+    searchText: string,
+    changeHandler: (text: string) => void
+}
