@@ -14,6 +14,7 @@ function SquadBuilder(){
     const [error, setError] = useState<string | null>(null);
     const [searchText, setSearchText] = useState("");
     const [selectedEntityStatus, setSelectedEntityStatus] = useState<EntityStatus | "all">("all");
+    const [sortOrder, setSortOrder] = useState<SortType | null>(null);
 
     const entityStatuses = ["all", ...ENTITY_STATUSES] as const;
 
@@ -61,17 +62,22 @@ function SquadBuilder(){
         setEntities(prev=>[...prev.filter(p=>p.id !== id)]);
     }
     function dismissSquadMember(id: number){
+        const returnedEntity = squad.find(entity=>entity.id === id);
         setSquad(prev=>[...prev.filter(p=>p.id !== id)]);
-        setEntities(prev=>[...prev, ...squad.filter(ent=>ent.id === id)])
+        setEntities(prev=>{
+            if(!returnedEntity) return prev;
+            const updatedEntities = [...prev, returnedEntity];
+            return sortEntities(updatedEntities, sortOrder)
+        })
     }
     function handleChange(text: string){
         setSearchText(text);
     }
 
-    function handleSort(sortOrder: SortType){
-        const entitiesToSort: Entity[] = [...entities];
-        // nie wiem czy to typowanie tu ma sens, ale chcialem miec pewnosc, ze ta zmienna bedzie przyjmowac tylko i wylacznie tablice z Entity
-        switch(sortOrder){
+    function sortEntities(list: Entity[], order: SortType | null): Entity[]{
+        if(!order) return list;
+        const entitiesToSort = [...list];
+        switch(order){
             case "asc":
                 entitiesToSort.sort((a,b) => {
                     return a.name.localeCompare(b.name)
@@ -85,7 +91,13 @@ function SquadBuilder(){
             default:
                 console.error("Unknown error occured")
         }
-        setEntities(entitiesToSort);
+        return entitiesToSort;
+    }
+
+    function handleSort(order: SortType | null){
+        setSortOrder(order);
+        setEntities(prev=>sortEntities(prev, order));
+        
     }
 
     function handleFilter(status: EntityStatus | "all"){
