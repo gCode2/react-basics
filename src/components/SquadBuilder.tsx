@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import type { Entity, RawEntityApiResponse } from "../types/SquadBuilder/types";
+import { ENTITY_STATUSES, type Entity, type EntityStatus, type RawEntityApiResponse } from "../types/SquadBuilder/types";
 import SearchBar from "./SquadBuilder/SquadBuilderControls/SearchBar/SearchBar";
 import SquadNameSort from "./SquadBuilder/SquadBuilderControls/SquadNameSort/SquadNameSort";
 import SquadStatusFilter from "./SquadBuilder/SquadBuilderControls/SquadStatusFilter/SquadStatusFilter";
@@ -13,6 +13,9 @@ function SquadBuilder(){
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
     const [searchText, setSearchText] = useState("");
+    const [selectedEntityStatus, setSelectedEntityStatus] = useState<EntityStatus | "all">("all");
+
+    const entityStatuses = ["all", ...ENTITY_STATUSES] as const;
 
     async function fetchEntities(url: string): Promise<void>{
         try{
@@ -85,6 +88,10 @@ function SquadBuilder(){
         setEntities(entitiesToSort);
     }
 
+    function handleFilter(status: EntityStatus | "all"){
+        setSelectedEntityStatus(status)
+    }
+
     return (
         <>
            <div className="app">
@@ -96,15 +103,28 @@ function SquadBuilder(){
                         <SquadNameSort sortHandler={handleSort}/>
                     </div>
                     <div>
-                        <SquadStatusFilter/>
+                        <SquadStatusFilter entityStatuses={entityStatuses} filterHandler={handleFilter}/>
                     </div>
                 </div>
                 <div>
                     <div>
                         <h2>Entities to recruit</h2>
                     </div>
-                    {isLoading ? <p>Loading entities... </p> : <EntityList entities={searchText==="" ? entities : entities.filter(entity=>entity.name.toLowerCase().includes(searchText.toLowerCase()))} actionLabel="recruit" actionHandler={recruitSquadMember}/>}
-                    
+                    {
+                        isLoading ? (
+                            <p>Loading entities...</p>
+                        ) : (
+                            <EntityList
+                                entities={entities.filter(entity=>{
+                                    const matchesSearch = entity.name.toLowerCase().includes(searchText.toLowerCase());
+                                    const matchesStatus = selectedEntityStatus === "all" || !selectedEntityStatus || entity.status === selectedEntityStatus
+                                    return matchesSearch && matchesStatus
+                                })}
+                                actionLabel="recruit"
+                                actionHandler={recruitSquadMember}
+                            />
+                        )
+                    }
                 </div>
                 <div>
                     <div>

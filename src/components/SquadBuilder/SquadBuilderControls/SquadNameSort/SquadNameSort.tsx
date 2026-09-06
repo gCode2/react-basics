@@ -4,9 +4,9 @@ function SquadNameSort({sortHandler}: SquadNameSortProps){
     return (
         <>
             <div>
-                <h2>
+                <h3>
                         Sort entities by name
-                </h2>
+                </h3>
                 <div className="squadNameSortChips">
                     
                     <div className="chip" onClick={()=>sortHandler("asc")}>

@@ -1,4 +1,5 @@
-export type EntityStatus = "Alive" | "Dead" | "unknown"
+export const ENTITY_STATUSES = ["Alive", "Dead", "unknown"] as const;
+export type EntityStatus = typeof ENTITY_STATUSES[number];
 export type GenderType = "Male" | "Female" | "unknown"
 export interface RawEntityDetails{
     created: Date,
@@ -41,7 +42,7 @@ export interface RawEntityApiResponse{
 }
 export interface EntityListProps{
     entities: Entity[],
-    actionLabel: string
+    actionLabel: string,
     actionHandler: (id: number) => void
 }
 
@@ -58,4 +59,9 @@ export interface SearchBarProps{
 
 export interface SquadNameSortProps{
     sortHandler: (sortOrder: string) => void
+}
+
+export interface SquadStatusFilterProps{
+    entityStatuses: readonly (EntityStatus | "all")[],
+    filterHandler: (status: EntityStatus | "all") => void
 }

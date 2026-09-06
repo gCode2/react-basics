@@ -85,7 +85,7 @@ body{
     color:#aaa;
     font-size: 14px;
 }
-.difficultyChips, .categoryChips, .specializationChips, .potionTypeChips, .creatureChips, .squadNameSortChips{
+.difficultyChips, .categoryChips, .specializationChips, .potionTypeChips, .creatureChips, .squadNameSortChips, .squadNameFilterChips{
     display:flex;
     flex-direction:row;
     width: 400px;
