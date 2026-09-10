@@ -64,3 +64,26 @@ export interface SquadStatusFilterProps{
     entityStatuses: readonly (EntityStatus | "all")[],
     filterHandler: (status: EntityStatus | "all") => void
 }
+export interface SquadState{
+    entities: Entity[],
+    squad: Entity[],
+    sortOrder: SortType | null,
+    selectedEntityStatus: EntityStatus | "all"
+}
+
+export type SquadAction = | {
+    type: "FETCH_SUCCESS",
+    entities: Entity[]
+} | {
+    type: "RECRUIT",
+    id: number
+} | {
+    type: "DISMISS",
+    id: number
+} | {
+    type: "SET_SORT",
+    order: SortType | null
+} | {
+    type: "SET_FILTER",
+    status: EntityStatus | "all"
+}
