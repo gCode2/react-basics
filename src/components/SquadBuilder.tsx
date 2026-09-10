@@ -4,6 +4,7 @@ import SearchBar from "./SquadBuilder/SquadBuilderControls/SearchBar/SearchBar";
 import SquadNameSort from "./SquadBuilder/SquadBuilderControls/SquadNameSort/SquadNameSort";
 import SquadStatusFilter from "./SquadBuilder/SquadBuilderControls/SquadStatusFilter/SquadStatusFilter";
 import EntityList from "./SquadBuilder/EntityList/EntityList";
+import TestingTodo from "./SquadBuilder/TestingTodo";
 
 const ENTITIES_URL = "https://rickandmortyapi.com/api/character"
 
@@ -106,7 +107,7 @@ function SquadBuilder(){
 
     return (
         <>
-           <div className="app">
+           {/* <div className="app">
                 <div className="container">
                     <div>
                         <SearchBar searchText={searchText} changeHandler={handleChange}/>
@@ -149,7 +150,8 @@ function SquadBuilder(){
 
                 
                 
-           </div>
+           </div> */}
+           <TestingTodo/>
         </>
     )
 }
