@@ -7,8 +7,10 @@
 // import MagesGuild from './components/MagesGuild';
 // import PotionStorage from './components/PotionStorage'
 // import Bestiary from './components/Bestiary'
+// import SquadBuilder from './components/SquadBuilder'
 import './App.css'
-import SquadBuilder from './components/SquadBuilder'
+import BookWishlist from './components/BookWishlist'
+
 
 
 
@@ -20,7 +22,7 @@ function App() {
 
   return(
     <>
-      <SquadBuilder/>
+      <BookWishlist/>
     </>
     // <FirstReminder/>
     // <SecondReminder/>
@@ -31,6 +33,7 @@ function App() {
     // <MagesGuild/>
     // <PotionStorage/>
     // <Bestiary/>
+    // <SquadBuilder/>
   )
 }
 
