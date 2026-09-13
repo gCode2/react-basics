@@ -30,10 +30,10 @@ export interface RawApiResponse{
 
 export interface Book{
     id: string,
-    author: string[],
+    author: string,
     title: string,
     year?: number,
-    cover_i?: string | undefined
+    coverUrl?: string
 }
 export interface BooksListProps{
     books: Book[]
