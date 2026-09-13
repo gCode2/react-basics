@@ -1,8 +1,13 @@
 function SearchBooksForm(){
+
+    function submitHandler(){
+
+    }
+    
     return(
         <>
         <div>
-            <form onSubmit={()=>console.log("XD")}>
+            <form onSubmit={submitHandler}>
                 <input type="text"/>
                 <button type="submit">
                     Search books!
