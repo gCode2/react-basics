@@ -32,8 +32,8 @@ export interface Book{
     id: string,
     author: string[],
     title: string,
-    year: number,
-    coverId?: number | null
+    year?: number,
+    cover_i?: string | undefined
 }
 export interface BooksListProps{
     books: Book[]

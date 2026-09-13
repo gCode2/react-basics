@@ -161,7 +161,7 @@ body{
     align-items: center;
     justify-content: space-around;
 }
-.notesListHolder, .magesListHolder, .potionsListHolder, .creatureListHolder, .entityList{
+.notesListHolder, .magesListHolder, .potionsListHolder, .creatureListHolder, .entityList, .booksList{
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
@@ -196,7 +196,7 @@ body{
 .formInputError{
     border: 1px solid #ff0000;
 }
-.entityCard{
+.entityCard, .bookCard{
     height: 250px;
     width: 200px;
     border: 1px solid #333333;
@@ -213,7 +213,7 @@ body{
     height:150px;
     display: flex;
 }
-.entityImage{
+.entityImage, .bookImage{
     width:100%;
     height: 100%;
     object-fit: fill;
@@ -263,4 +263,11 @@ body{
 }
 .dismiss:hover{
     background: #ff5e5e;
+}
+.bookId{
+    font-size: 9px;
+    color:#555;
+}
+.bookCard{
+    font-size: 12px;
 }

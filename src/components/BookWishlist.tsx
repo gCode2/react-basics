@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import BooksList from "./BookWishlist/BooksList/BooksList";
 import SearchBooksForm from "./BookWishlist/SearchBooksForm/SearchBooksForm";
 import type { Book, RawApiResponse } from "../types/BookWishlist/types";
@@ -18,7 +18,7 @@ function BookWishlist(){
         author: book.author_name,
         title: book.title,
         year: book.first_publish_year,
-        coverId: book.cover_i
+        cover_i: book.cover_i ? `https://covers.openlibrary.org/b/id/${book.cover_i}-M.jpg` : "https://img.magnific.com/free-vector/blue-text-book-library-icon_24877-83092.jpg"
     })) : [];
 
     function handleSubmit(searchText: string){

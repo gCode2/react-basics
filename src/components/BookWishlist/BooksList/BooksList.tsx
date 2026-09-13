@@ -4,11 +4,13 @@ import Book from "./Book/Book";
 function BooksList({books}: BooksListProps){
     return(
         <>
-            {
-                books.map(book=>(
-                    <Book key={book.id} book={book}/>
-                ))
-            }
+            <div className="booksList">
+                {
+                    books.map(book=>(
+                        <Book key={book.id} book={book}/>
+                    ))
+                }
+            </div>
         </>
     )
 }
