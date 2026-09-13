@@ -33,5 +33,11 @@ export interface Book{
     author: string[],
     title: string,
     year: number,
-    coverId: number
+    coverId?: number | null
+}
+export interface BooksListProps{
+    books: Book[]
+}
+export interface BookProps{
+    book: Book
 }
