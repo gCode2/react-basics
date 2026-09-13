@@ -271,3 +271,13 @@ body{
 .bookCard{
     font-size: 12px;
 }
+.wishlisted{
+    height: 15px;
+    font-size: 15px;
+    position:absolute;
+    top: -242px;
+    left: 10px;
+    padding: 5px;
+    background: #39ff12;
+    border-radius: 5px;
+}

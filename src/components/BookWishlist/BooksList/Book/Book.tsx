@@ -1,6 +1,6 @@
 import type { BookProps } from "../../../../types/BookWishlist/types";
 
-function Book({book}: BookProps){
+function Book({book, onAddWishlist, onRemoveWishlist, wishlistedIds}: BookProps){
     return(
         <>
             <div className="bookCard">
@@ -16,10 +16,25 @@ function Book({book}: BookProps){
                 <div>
                     Author(s): {book.author}
                 </div>
+                <div>
+                    {wishlistedIds.some(b=>book.id === b) ? 
+                    <button onClick={()=>onRemoveWishlist(book.id)}>
+                        Remove from a Wishlist!
+                    </button> : 
+                    <button onClick={()=>onAddWishlist(book)}>
+                        Add to a Wishlist!
+                    </button>}
+                </div>
+                <div className="bookId">
+                    #{book.id}
+                </div>
+                {wishlistedIds.some(b=>book.id === b) ? 
+                <div className="entityHolder">
+                        <div className="wishlisted">
+                            Wishlisted
+                        </div>
+                </div>: ""}
                 
-                         <div className="bookId">
-                             #{book.id}
-                         </div>
                 
             </div>
         </>

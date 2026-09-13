@@ -35,12 +35,33 @@ export interface Book{
     year?: number,
     coverUrl?: string
 }
+
 export interface BooksListProps{
-    books: Book[]
+    books: Book[],
+    onAddWishlist: (book: Book) => void,
+    onRemoveWishlist: (id: string) => void,
+    wishlistedIds: string[],
 }
+
 export interface BookProps{
-    book: Book
+    book: Book,
+    onAddWishlist: (book: Book) => void,
+    onRemoveWishlist: (id: string) => void,
+    wishlistedIds: string[],
 }
+
 export interface SearchBooksFormProps{
     submitHandler: (searchText: string) => void
+}
+
+export interface BookWishlistState{
+    wishlistedBooks: Book[]
+}
+
+export type BookWishlistActions = | {
+    type: "WISHLIST_ADD",
+    book: Book
+} | {
+    type: "WISHLIST_REMOVE",
+    id: string
 }
