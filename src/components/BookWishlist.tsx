@@ -5,11 +5,10 @@ import type { Book, RawApiResponse } from "../types/BookWishlist/types";
 
 const OPEN_LIBRARY_API = "https://openlibrary.org/search.json?q=Pinokio&limit=10"
 
-function BookWishlist(){
+function useFetchBooks(url: string){
     const [books, setBooks] = useState<Book[] | null>(null);
     const [isLoading, setLoading] = useState(true);
     const [error, setError] = useState<string | null>(null)
-
     async function fetchBooks(url:string){
         try{
             setLoading(true);
@@ -44,8 +43,16 @@ function BookWishlist(){
     }
 
     useEffect(()=>{
-        fetchBooks(OPEN_LIBRARY_API)
+        fetchBooks(url)
     },[])
+
+    return {books, isLoading, error}
+}
+
+function BookWishlist(){
+    
+    const {books, isLoading, error} = useFetchBooks(OPEN_LIBRARY_API);
+    
 
 
 
