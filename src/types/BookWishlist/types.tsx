@@ -41,3 +41,6 @@ export interface BooksListProps{
 export interface BookProps{
     book: Book
 }
+export interface SearchBooksFormProps{
+    submitHandler: (searchText: string) => void
+}
