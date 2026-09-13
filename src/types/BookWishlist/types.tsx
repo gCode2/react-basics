@@ -41,6 +41,8 @@ export interface BooksListProps{
     onAddWishlist: (book: Book) => void,
     onRemoveWishlist: (id: string) => void,
     wishlistedIds: string[],
+    readToggleHandler: (id:string) => void,
+    readBooks: string[]
 }
 
 export interface BookProps{
@@ -48,6 +50,8 @@ export interface BookProps{
     onAddWishlist: (book: Book) => void,
     onRemoveWishlist: (id: string) => void,
     wishlistedIds: string[],
+    readToggleHandler: (id:string) => void,
+    readBooks: string[]
 }
 
 export interface SearchBooksFormProps{
@@ -55,7 +59,8 @@ export interface SearchBooksFormProps{
 }
 
 export interface BookWishlistState{
-    wishlistedBooks: Book[]
+    wishlistedBooks: Book[],
+    readBookIds: string[]
 }
 
 export type BookWishlistActions = | {
@@ -63,5 +68,8 @@ export type BookWishlistActions = | {
     book: Book
 } | {
     type: "WISHLIST_REMOVE",
+    id: string
+} | {
+    type: "READ_TOGGLE",
     id: string
 }

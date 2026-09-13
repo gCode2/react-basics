@@ -281,3 +281,15 @@ body{
     background: #39ff12;
     border-radius: 5px;
 }
+.readToggleHolder{
+    position:relative;
+}
+.readToggleButton{
+    position:absolute;
+    bottom:225px;
+    left: -90px;
+}
+.readButton{
+    width:90px;
+    font-size:9px;
+}

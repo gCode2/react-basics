@@ -1,6 +1,6 @@
 import type { BookProps } from "../../../../types/BookWishlist/types";
 
-function Book({book, onAddWishlist, onRemoveWishlist, wishlistedIds}: BookProps){
+function Book({book, onAddWishlist, onRemoveWishlist, wishlistedIds, readToggleHandler, readBooks}: BookProps){
     return(
         <>
             <div className="bookCard">
@@ -35,7 +35,14 @@ function Book({book, onAddWishlist, onRemoveWishlist, wishlistedIds}: BookProps)
                         </div>
                 </div>: ""}
                 
-                
+                <div className="readToggleHolder">
+                        <div className="readToggleButton">
+                            <button className="readButton" onClick={()=>readToggleHandler(book.id)}>
+                                {readBooks.some(b=>book.id===b) ? "Remove from read" : "Mark as read"}
+                            </button>
+                            
+                        </div>
+                </div>
             </div>
         </>
     )

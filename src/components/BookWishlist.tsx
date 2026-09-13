@@ -23,7 +23,7 @@ function BookWishlist(){
     }
 
     function getWishlistedBooks(): string[]{
-        return [...new Set(state.wishlistedBooks.map(b=>b.id))];
+        return new Array(...state.wishlistedBooks.map(b=>b.id));
     }
 
     function bookReducer(state: BookWishlistState, action: BookWishlistActions): BookWishlistState{
@@ -41,12 +41,26 @@ function BookWishlist(){
                     wishlistedBooks: state.wishlistedBooks.filter(b=>b.id !== action.id)
                 }
             }
+            case "READ_TOGGLE":{
+                if(state.readBookIds.some(b=>b===action.id)){
+                    return {...state, readBookIds: state.readBookIds.filter(b=>b!==action.id)}
+                }else{
+                    return{...state, readBookIds: [...state.readBookIds, action.id]}
+                }
+            }
             default:
                 throw new Error ("Unknown action!");
         }
     }
 
-    const [state, dispatch] = useReducer(bookReducer, {wishlistedBooks: []});
+    function handleReadToggle(id: string){
+        dispatch({
+            type:"READ_TOGGLE",
+            id: id
+        })
+    }
+
+    const [state, dispatch] = useReducer(bookReducer, {wishlistedBooks: [], readBookIds: []});
 
     function handleBookWishlist(book: Book){
         dispatch({
@@ -71,13 +85,13 @@ function BookWishlist(){
                     {isLoading && <div>Loading...</div>}
                     {error && <div className="error">{error}</div>}
                     {!error && !isLoading && data && (
-                        <BooksList books={books} onAddWishlist={handleBookWishlist} onRemoveWishlist={handleBookWishlistRemove} wishlistedIds={getWishlistedBooks()}/>
+                        <BooksList books={books} onAddWishlist={handleBookWishlist} onRemoveWishlist={handleBookWishlistRemove} wishlistedIds={getWishlistedBooks()} readToggleHandler={handleReadToggle} readBooks={state.readBookIds}/>
                     )}
                 </div>
                 <div>
                     <div><h3>Wishlisted books:</h3></div>
                     <div>
-                        <BooksList books={state.wishlistedBooks} onAddWishlist={handleBookWishlist} onRemoveWishlist={handleBookWishlistRemove} wishlistedIds={getWishlistedBooks()}/>
+                        <BooksList books={state.wishlistedBooks} onAddWishlist={handleBookWishlist} onRemoveWishlist={handleBookWishlistRemove} wishlistedIds={getWishlistedBooks()} readToggleHandler={handleReadToggle} readBooks={state.readBookIds}/>
                     </div>
                 </div>
             </div>
