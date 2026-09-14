@@ -1,8 +1,9 @@
 import { useReducer, useState } from "react";
 import BooksList from "./BookWishlist/BooksList/BooksList";
 import SearchBooksForm from "./BookWishlist/SearchBooksForm/SearchBooksForm";
-import type { Book, BookWishlistActions, BookWishlistState, RawApiResponse } from "../types/BookWishlist/types";
+import { FILTER_TYPES, type Book, type BookWishlistActions, type BookWishlistState, type FilterStatus, type RawApiResponse } from "../types/BookWishlist/types";
 import useFetch from "../hooks/useFetch";
+import FilterController from "./BookWishlist/BookWishlistControls/FilterController/FilterController";
 
 function BookWishlist(){
     const [url, setUrl] = useState<string | null>(null);
@@ -23,7 +24,7 @@ function BookWishlist(){
     }
 
     function getWishlistedBooks(): string[]{
-        return new Array(...state.wishlistedBooks.map(b=>b.id));
+        return state.wishlistedBooks.map(b=>b.id);
     }
 
     function bookReducer(state: BookWishlistState, action: BookWishlistActions): BookWishlistState{
@@ -48,6 +49,9 @@ function BookWishlist(){
                     return{...state, readBookIds: [...state.readBookIds, action.id]}
                 }
             }
+            case "SET_FILTER":{
+                return {...state, selectedBookStatus: action.filterStatus}
+            }
             default:
                 throw new Error ("Unknown action!");
         }
@@ -60,7 +64,7 @@ function BookWishlist(){
         })
     }
 
-    const [state, dispatch] = useReducer(bookReducer, {wishlistedBooks: [], readBookIds: []});
+    const [state, dispatch] = useReducer(bookReducer, {wishlistedBooks: [], readBookIds: [], selectedBookStatus: "all"});
 
     function handleBookWishlist(book: Book){
         dispatch({
@@ -75,11 +79,23 @@ function BookWishlist(){
         })
     }
 
+    const bookStatuses = ["all", ...FILTER_TYPES] as const;
+    
+    function handleFilterChange(filterStatus: FilterStatus | "all"){
+        dispatch({
+            type: "SET_FILTER",
+            filterStatus: filterStatus
+        })
+    }
+
     return (
         <>
             <div className="app">
                 <div>
                     <SearchBooksForm submitHandler={handleSubmit}/>
+                </div>
+                <div>
+                    <FilterController bookStatuses={bookStatuses} filterHandler={handleFilterChange}/>
                 </div>
                 <div>
                     {isLoading && <div>Loading...</div>}
@@ -91,7 +107,18 @@ function BookWishlist(){
                 <div>
                     <div><h3>Wishlisted books:</h3></div>
                     <div>
-                        <BooksList books={state.wishlistedBooks} onAddWishlist={handleBookWishlist} onRemoveWishlist={handleBookWishlistRemove} wishlistedIds={getWishlistedBooks()} readToggleHandler={handleReadToggle} readBooks={state.readBookIds}/>
+                        <BooksList books={state.wishlistedBooks.filter(book=>{
+                            const isRead = state.readBookIds.includes(book.id);
+                            const matchesStatus = 
+                            state.selectedBookStatus === "all" || 
+                            (state.selectedBookStatus==="read" && isRead) || 
+                            (state.selectedBookStatus==="unread" && !isRead)
+
+                            return matchesStatus
+                        })} 
+                        
+                        
+                        onAddWishlist={handleBookWishlist} onRemoveWishlist={handleBookWishlistRemove} wishlistedIds={getWishlistedBooks()} readToggleHandler={handleReadToggle} readBooks={state.readBookIds}/>
                     </div>
                 </div>
             </div>

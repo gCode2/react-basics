@@ -60,7 +60,8 @@ export interface SearchBooksFormProps{
 
 export interface BookWishlistState{
     wishlistedBooks: Book[],
-    readBookIds: string[]
+    readBookIds: string[],
+    selectedBookStatus: FilterStatus | "all",
 }
 
 export type BookWishlistActions = | {
@@ -72,4 +73,15 @@ export type BookWishlistActions = | {
 } | {
     type: "READ_TOGGLE",
     id: string
+} | {
+    type: "SET_FILTER",
+    filterStatus: FilterStatus | "all"
+}
+
+export const FILTER_TYPES = ["read", "unread"] as const;
+export type FilterStatus = typeof FILTER_TYPES[number];
+
+export interface FilterControllerProps{
+    bookStatuses: readonly (FilterStatus | "all")[],
+    filterHandler: (filterStatus: FilterStatus | "all") => void
 }

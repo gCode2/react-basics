@@ -7,9 +7,10 @@ function BooksList({books, onAddWishlist, onRemoveWishlist, wishlistedIds, readT
         <>
             <div className="booksList">
                 {
+                    books.length > 0 ? 
                     books.map(book=>(
                         <Book key={book.id} book={book} onAddWishlist={onAddWishlist} onRemoveWishlist={onRemoveWishlist} wishlistedIds={wishlistedIds} readToggleHandler={readToggleHandler} readBooks={readBooks}/>
-                    ))
+                    )) : "No books to display"
                 }
             </div>
         </>
