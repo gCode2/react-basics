@@ -1,16 +1,16 @@
 import type { SortControllerProps } from "../../../../types/BookWishlist/types";
 
-function SortController({sortHandler}: SortControllerProps){
+function SortController({sortOrderHandler, sortFieldHandler}: SortControllerProps){
     return(
         <>
             <div>
-                Sort:
+                Sort: <button onClick={()=>sortFieldHandler("author")}>author</button> <button onClick={()=>sortFieldHandler("year")}>year</button>
             </div>
             <div className="bookChips">
-                <div className="chip" onClick={()=>sortHandler("asc")}>
+                <div className="chip" onClick={()=>sortOrderHandler("asc")}>
                     Asc
                 </div>
-                <div className="chip" onClick={()=>sortHandler("desc")}>
+                <div className="chip" onClick={()=>sortOrderHandler("desc")}>
                     Desc
                 </div>
             </div>

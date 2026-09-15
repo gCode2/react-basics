@@ -1,7 +1,7 @@
 import { useReducer, useState } from "react";
 import BooksList from "./BookWishlist/BooksList/BooksList";
 import SearchBooksForm from "./BookWishlist/SearchBooksForm/SearchBooksForm";
-import { FILTER_TYPES, type Book, type BookWishlistActions, type BookWishlistState, type FilterStatus, type RawApiResponse, type SortType } from "../types/BookWishlist/types";
+import { FILTER_TYPES, type Book, type BookWishlistActions, type BookWishlistState, type Fields, type FilterStatus, type RawApiResponse, type SortType } from "../types/BookWishlist/types";
 import useFetch from "../hooks/useFetch";
 import FilterController from "./BookWishlist/BookWishlistControls/FilterController/FilterController";
 import SortController from "./BookWishlist/BookWishlistControls/SortController/SortController";
@@ -53,32 +53,11 @@ function BookWishlist(){
             case "SET_FILTER":{
                 return {...state, selectedBookStatus: action.filterStatus}
             }
-            case "SET_SORT":{
-                switch(action.order){
-                    case "asc":{
-
-                        return {
-                            ...state,
-                            wishlistedBooks: state.wishlistedBooks.sort((a: Book,b: Book)=>{
-                                return a.author.localeCompare(b.author);
-                            })
-                        }
-
-                    }
-                    case "desc":{
-
-                        return {
-                            ...state,
-                            wishlistedBooks: state.wishlistedBooks.sort((a: Book,b: Book)=>{
-                                return b.author.localeCompare(a.author);
-                            })
-                        }
-
-                    }
-                    default: 
-                        throw Error ("Unknown sort order")
-                }
-                
+            case "SET_SORT_ORDER":{
+                return {...state,order: action.order}
+            }
+            case "SET_SORT_FIELD": {
+                return {...state, sortField: action.field}
             }
             default:
                 throw new Error ("Unknown action!");
@@ -92,7 +71,7 @@ function BookWishlist(){
         })
     }
 
-    const [state, dispatch] = useReducer(bookReducer, {wishlistedBooks: [], readBookIds: [], selectedBookStatus: "all", sortOrder: null});
+    const [state, dispatch] = useReducer(bookReducer, {wishlistedBooks: [], readBookIds: [], selectedBookStatus: "all", order: null, sortField: null});
 
     function handleBookWishlist(book: Book){
         dispatch({
@@ -115,12 +94,42 @@ function BookWishlist(){
             filterStatus: filterStatus
         })
     }
-    function handleSort(sortType: SortType | null){
+    function handleSortOrder(sortType: SortType | null){
         dispatch({
-            type: "SET_SORT",
+            type: "SET_SORT_ORDER",
             order: sortType
         })
     }
+    function handleSortField(sortField: Fields | null){
+        dispatch({
+            type: "SET_SORT_FIELD",
+            field: sortField
+        })
+    }
+
+    const filteredBooks = state.wishlistedBooks.filter(book => {
+        const isRead = state.readBookIds.includes(book.id);
+        const matchesStatus = 
+            state.selectedBookStatus === "all" || 
+            (state.selectedBookStatus === "read" && isRead) || 
+            (state.selectedBookStatus === "unread" && !isRead);
+
+        return matchesStatus;
+    });
+    const sortedAndFilteredBooks = [...filteredBooks].sort((a, b)=>{
+        const field = state.sortField ?? "author";
+        const order = state.order ?? "asc";
+        const modifier = order === "asc" ? 1 : -1;
+        if(field === "author"){
+            return a.author.localeCompare(b.author) * modifier;
+        }
+        if(field === "year"){
+            const yearA = a.year ?? 0;
+            const yearB = b.year ?? 0;
+            return (yearA - yearB) * modifier;
+        }
+        return 0;
+    })
 
     return (
         <>
@@ -140,24 +149,18 @@ function BookWishlist(){
                         <FilterController bookStatuses={bookStatuses} filterHandler={handleFilterChange}/>
                     </div>
                     <div>
-                        <SortController sortHandler={handleSort}/>
+                        <SortController sortOrderHandler={handleSortOrder} sortFieldHandler={handleSortField}/>
                     </div>
                 <div>
                     <div><h3>Wishlisted books:</h3></div>
                     
                     <div>
-                        <BooksList books={state.wishlistedBooks.filter(book=>{
-                            const isRead = state.readBookIds.includes(book.id);
-                            const matchesStatus = 
-                            state.selectedBookStatus === "all" || 
-                            (state.selectedBookStatus==="read" && isRead) || 
-                            (state.selectedBookStatus==="unread" && !isRead)
-
-                            return matchesStatus
-                        })} 
                         
-                        
-                        onAddWishlist={handleBookWishlist} onRemoveWishlist={handleBookWishlistRemove} wishlistedIds={getWishlistedBooks()} readToggleHandler={handleReadToggle} readBooks={state.readBookIds}/>
+                        <BooksList books={sortedAndFilteredBooks} 
+                        onAddWishlist={handleBookWishlist}
+                        onRemoveWishlist={handleBookWishlistRemove} wishlistedIds={getWishlistedBooks()}
+                        readToggleHandler={handleReadToggle}
+                        readBooks={state.readBookIds}/>
                     </div>
                 </div>
             </div>
