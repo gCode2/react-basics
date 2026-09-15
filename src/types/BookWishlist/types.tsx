@@ -62,6 +62,7 @@ export interface BookWishlistState{
     wishlistedBooks: Book[],
     readBookIds: string[],
     selectedBookStatus: FilterStatus | "all",
+    sortOrder: SortType | null
 }
 
 export type BookWishlistActions = | {
@@ -76,6 +77,9 @@ export type BookWishlistActions = | {
 } | {
     type: "SET_FILTER",
     filterStatus: FilterStatus | "all"
+} | {
+    type: "SET_SORT",
+    order: SortType | null
 }
 
 export const FILTER_TYPES = ["read", "unread"] as const;
@@ -84,4 +88,8 @@ export type FilterStatus = typeof FILTER_TYPES[number];
 export interface FilterControllerProps{
     bookStatuses: readonly (FilterStatus | "all")[],
     filterHandler: (filterStatus: FilterStatus | "all") => void
+}
+export type SortType = "asc" | "desc";
+export interface SortControllerProps{
+    sortHandler: (sortType: SortType) => void;
 }
